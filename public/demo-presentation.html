@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أبشر سفر - عرض تقديمي للمشروع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+        :root {
+            --primary: #544099;
+            --primary-light: #7B5DC2;
+            --primary-dark: #3D2E73;
+        }
         
         * {
             margin: 0;
@@ -14,7 +21,7 @@
         }
         
         body {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', sans-serif;
             background: #0a0a0a;
             color: #fff;
             line-height: 1.8;
@@ -37,7 +44,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, rgba(34, 139, 34, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(84, 64, 153, 0.1) 0%, rgba(123, 93, 194, 0.1) 100%);
             z-index: 0;
         }
         
@@ -52,7 +59,7 @@
         .slide-title {
             font-size: 48px;
             font-weight: 800;
-            color: #4CAF50;
+            color: var(--primary);
             margin-bottom: 40px;
             text-align: center;
         }
@@ -77,15 +84,16 @@
         .logo-container svg {
             width: 100px;
             height: 150px;
-            color: #4CAF50;
+            color: var(--primary);
         }
         
         .main-title {
             font-size: 72px;
             font-weight: 800;
-            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
         }
         
@@ -106,13 +114,13 @@
         
         .data-card {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(84, 64, 153, 0.3);
             border-radius: 16px;
             padding: 30px;
         }
         
         .data-card h3 {
-            color: #4CAF50;
+            color: var(--primary);
             font-size: 22px;
             margin-bottom: 20px;
             display: flex;
@@ -124,7 +132,7 @@
             content: '';
             width: 8px;
             height: 8px;
-            background: #4CAF50;
+            background: var(--primary);
             border-radius: 50%;
         }
         
@@ -151,8 +159,8 @@
         }
         
         .tech-card {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05));
-            border: 1px solid rgba(76, 175, 80, 0.2);
+            background: linear-gradient(135deg, rgba(84, 64, 153, 0.1), rgba(84, 64, 153, 0.05));
+            border: 1px solid rgba(84, 64, 153, 0.2);
             border-radius: 16px;
             padding: 30px;
             text-align: center;
@@ -161,13 +169,13 @@
         
         .tech-card:hover {
             transform: translateY(-5px);
-            border-color: #4CAF50;
+            border-color: var(--primary);
         }
         
         .tech-icon {
             width: 60px;
             height: 60px;
-            background: rgba(76, 175, 80, 0.2);
+            background: rgba(84, 64, 153, 0.2);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -177,7 +185,7 @@
         }
         
         .tech-card h4 {
-            color: #4CAF50;
+            color: var(--primary);
             font-size: 18px;
             margin-bottom: 12px;
         }
@@ -203,7 +211,7 @@
             left: 10%;
             right: 10%;
             height: 4px;
-            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
             z-index: 0;
         }
         
@@ -218,7 +226,7 @@
         .step-number {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -226,7 +234,7 @@
             margin: 0 auto 20px;
             font-size: 32px;
             font-weight: 700;
-            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+            box-shadow: 0 4px 20px rgba(84, 64, 153, 0.4);
         }
         
         .step-title {
@@ -244,14 +252,14 @@
         /* Algorithm Section */
         .algorithm-box {
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(84, 64, 153, 0.3);
             border-radius: 16px;
             padding: 40px;
             margin-top: 40px;
         }
         
         .algorithm-box h3 {
-            color: #4CAF50;
+            color: var(--primary);
             font-size: 24px;
             margin-bottom: 30px;
             text-align: center;
@@ -267,14 +275,14 @@
         .risk-factor {
             text-align: center;
             padding: 20px;
-            background: rgba(76, 175, 80, 0.1);
+            background: rgba(84, 64, 153, 0.1);
             border-radius: 12px;
         }
         
         .risk-factor .percentage {
             font-size: 36px;
             font-weight: 700;
-            color: #4CAF50;
+            color: var(--primary);
         }
         
         .risk-factor .label {
@@ -296,8 +304,8 @@
         }
         
         .risk-level.low {
-            background: rgba(76, 175, 80, 0.2);
-            border: 2px solid #4CAF50;
+            background: rgba(84, 64, 153, 0.2);
+            border: 2px solid var(--primary);
         }
         
         .risk-level.medium {
@@ -321,7 +329,7 @@
             font-weight: 700;
         }
         
-        .risk-level.low .level-name, .risk-level.low .multiplier { color: #4CAF50; }
+        .risk-level.low .level-name, .risk-level.low .multiplier { color: var(--primary); }
         .risk-level.medium .level-name, .risk-level.medium .multiplier { color: #FFC107; }
         .risk-level.high .level-name, .risk-level.high .multiplier { color: #F44336; }
         
@@ -343,7 +351,7 @@
         .notification-icon {
             width: 50px;
             height: 50px;
-            background: rgba(76, 175, 80, 0.2);
+            background: rgba(84, 64, 153, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -379,7 +387,7 @@
         }
         
         .screenshot-header {
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             padding: 16px 20px;
             display: flex;
             align-items: center;
@@ -439,7 +447,7 @@
         }
         
         .nav-dot:hover, .nav-dot.active {
-            background: #4CAF50;
+            background: var(--primary);
             transform: scale(1.3);
         }
         
@@ -497,7 +505,7 @@
             </div>
             <h1 class="main-title">أبشر سفر</h1>
             <p class="main-subtitle">حل مبتكر لتمكين المدينين من السفر مع ضمان حقوق الدائنين عبر نظام سداد تلقائي ذكي</p>
-            <div style="color: #4CAF50; font-size: 18px;">Absher Safar - Travel Permit System</div>
+            <div style="color: var(--primary-light); font-size: 18px;">Absher Safar - Travel Permit System</div>
         </div>
     </section>
 
@@ -693,7 +701,7 @@
     <section id="slide6" class="slide">
         <div class="slide-content">
             <h2 class="slide-title">📱 شاشات التطبيق</h2>
-            <p class="slide-subtitle">نظرة على واجهات المستخدم الرئيسية</p>
+            <p class="slide-subtitle">نظرة على واجهات المستخدم الرئيسية - للعرض الحي: <a href="/servicedemo" style="color: var(--primary-light);">افتح التطبيق</a></p>
             
             <div class="screenshots-grid">
                 <div class="screenshot-card">
@@ -701,9 +709,8 @@
                         <span class="step-badge">الخطوة 1</span>
                         <h4>بيانات الرحلة</h4>
                     </div>
-                    <div class="screenshot-body">
-                        <div class="icon">✈️</div>
-                        <p>إدخال الوجهة، مدة السفر، وعرض حساب المبالغ المطلوبة تلقائياً</p>
+                    <div class="screenshot-body" style="padding: 0;">
+                        <iframe src="/servicedemo" style="width: 100%; height: 300px; border: none; pointer-events: none; transform: scale(0.6); transform-origin: top center; height: 500px;"></iframe>
                     </div>
                 </div>
                 
@@ -715,6 +722,12 @@
                     <div class="screenshot-body">
                         <div class="icon">🤝</div>
                         <p>إشعار الضامن وعرض تفاصيل الطلب مع خيار الموافقة أو الرفض</p>
+                        <div style="margin-top: 16px; padding: 12px; background: rgba(84, 64, 153, 0.1); border-radius: 8px; text-align: right;">
+                            <div style="color: var(--primary); font-weight: 600; margin-bottom: 8px;">📩 طلب كفالة سفر جديد</div>
+                            <div style="font-size: 12px; color: #aaa;">المدين: أحمد محمد</div>
+                            <div style="font-size: 12px; color: #aaa;">الوجهة: دبي، الإمارات</div>
+                            <div style="font-size: 12px; color: #aaa;">المدة: 5 أيام</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -726,6 +739,12 @@
                     <div class="screenshot-body">
                         <div class="icon">✅</div>
                         <p>عرض خطة السداد للدائن والحصول على موافقته</p>
+                        <div style="margin-top: 16px; padding: 12px; background: rgba(84, 64, 153, 0.1); border-radius: 8px;">
+                            <div style="color: var(--primary); font-weight: 600; margin-bottom: 8px;">جدول السداد المقترح</div>
+                            <div style="font-size: 12px; color: #aaa;">الخصم اليومي: ٢,٥٠٠ ر.س</div>
+                            <div style="font-size: 12px; color: #aaa;">المدة: 5 أيام</div>
+                            <div style="font-size: 12px; color: #aaa;">الإجمالي: ١٢,٥٠٠ ر.س</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -737,6 +756,11 @@
                     <div class="screenshot-body">
                         <div class="icon">💳</div>
                         <p>إيداع مبلغ الضمان في المحفظة الإلكترونية</p>
+                        <div style="margin-top: 16px; padding: 12px; background: rgba(84, 64, 153, 0.1); border-radius: 8px;">
+                            <div style="color: var(--primary); font-weight: 600; margin-bottom: 8px;">المبلغ المطلوب</div>
+                            <div style="font-size: 24px; color: #fff; font-weight: 700;">١٨,٧٥٠ ر.س</div>
+                            <div style="font-size: 11px; color: #888; margin-top: 4px;">(الضمان + هامش الأمان)</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -746,8 +770,12 @@
                         <h4>إصدار التصريح</h4>
                     </div>
                     <div class="screenshot-body">
-                        <div class="icon">📄</div>
-                        <p>عرض تصريح السفر مع رمز QR للتحقق وخيار الطباعة</p>
+                        <div class="icon" style="font-size: 36px;">✓</div>
+                        <p style="color: var(--primary); font-weight: 600; font-size: 16px;">تم إصدار تصريح السفر بنجاح</p>
+                        <div style="margin-top: 12px; padding: 10px; background: rgba(84, 64, 153, 0.2); border-radius: 8px; border: 1px solid rgba(84, 64, 153, 0.3);">
+                            <div style="font-size: 11px; color: #aaa;">رقم التصريح</div>
+                            <div style="font-size: 14px; color: #fff; font-family: monospace;">TR-2025-88992</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -757,8 +785,11 @@
                         <h4>تصريح السفر</h4>
                     </div>
                     <div class="screenshot-body">
-                        <div class="icon">🎫</div>
-                        <p>التصريح النهائي مع جميع البيانات ورمز التحقق</p>
+                        <div style="background: #fff; padding: 16px; border-radius: 8px; width: 100%;">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://absher.sa/verify/TR-2025-88992" alt="QR Code" style="display: block; margin: 0 auto 12px;">
+                            <div style="text-align: center; color: #333; font-size: 12px;">امسح للتحقق</div>
+                            <div style="text-align: center; color: var(--primary); font-weight: 600; margin-top: 8px; font-size: 11px;">TR-2025-88992</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -767,7 +798,7 @@
 
     <!-- Footer -->
     <footer class="slide-footer">
-        <p>أبشر سفر - Absher Safar | ديسمبر 2024</p>
+        <p>أبشر سفر - Absher Safar | 10/12/25</p>
         <p>https://github.com/ai-tmkin/sfr</p>
     </footer>
 
