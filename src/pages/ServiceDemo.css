@@ -533,6 +533,61 @@
   padding: 40px 16px;
 }
 
+/* Request ID styling */
+.absher-table .request-id {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.completed {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+.status-badge.pending {
+  background-color: #FFF3E0;
+  color: #E65100;
+}
+
+.status-badge.cancelled {
+  background-color: #FFEBEE;
+  color: #C62828;
+}
+
+.status-badge.processing {
+  background-color: #E3F2FD;
+  color: #1565C0;
+}
+
+/* Action Buttons */
+.action-btn {
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.action-btn.view-btn {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.action-btn.view-btn:hover {
+  background-color: var(--color-primary-dark);
+}
 
 /* Table Footer */
 .absher-table-footer {

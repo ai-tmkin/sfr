@@ -58,7 +58,55 @@ function ServiceDemo() {
     { icon: <FileText size={20} />, label: language === 'ar' ? 'الخدمات الإلكترونية' : 'E-Services', active: true },
     { icon: <ClipboardList size={20} />, label: language === 'ar' ? 'التفاويض' : 'Authorizations', active: false },
     { icon: <FileText size={20} />, label: language === 'ar' ? 'استبيانات أبشر' : 'Absher Surveys', active: false },
-    { icon: <CreditCard size={20} />, label: language === 'ar' ? 'المدفوعات الحكومية' : 'Government Payments', active: false },
+  ]
+
+  // Previous travel requests data
+  const previousRequests = [
+    {
+      id: 'TR-2024-45123',
+      destination: language === 'ar' ? 'القاهرة، مصر' : 'Cairo, Egypt',
+      duration: language === 'ar' ? '7 أيام' : '7 days',
+      amount: '26,250',
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2024-08-15'
+    },
+    {
+      id: 'TR-2024-38901',
+      destination: language === 'ar' ? 'عمّان، الأردن' : 'Amman, Jordan',
+      duration: language === 'ar' ? '4 أيام' : '4 days',
+      amount: '15,000',
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2024-06-20'
+    },
+    {
+      id: 'TR-2024-29876',
+      destination: language === 'ar' ? 'إسطنبول، تركيا' : 'Istanbul, Turkey',
+      duration: language === 'ar' ? '10 أيام' : '10 days',
+      amount: '37,500',
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2024-03-10'
+    },
+    {
+      id: 'TR-2023-87654',
+      destination: language === 'ar' ? 'كوالالمبور، ماليزيا' : 'Kuala Lumpur, Malaysia',
+      duration: language === 'ar' ? '14 يوم' : '14 days',
+      amount: '52,500',
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2023-12-01'
+    },
+    {
+      id: 'TR-2023-65432',
+      destination: language === 'ar' ? 'لندن، المملكة المتحدة' : 'London, UK',
+      duration: language === 'ar' ? '5 أيام' : '5 days',
+      amount: '18,750',
+      status: language === 'ar' ? 'ملغي' : 'Cancelled',
+      statusClass: 'cancelled',
+      date: '2023-09-22'
+    },
   ]
 
   // Render Loading State
@@ -115,6 +163,7 @@ function ServiceDemo() {
             <table className="absher-table">
               <thead>
                 <tr>
+                  <th>{language === 'ar' ? 'رقم الطلب' : 'Request #'}</th>
                   <th>{language === 'ar' ? 'الوجهة' : 'Destination'}</th>
                   <th>{language === 'ar' ? 'مدة السفر' : 'Duration'}</th>
                   <th>{language === 'ar' ? 'المبلغ المطلوب' : 'Required Amount'}</th>
@@ -123,16 +172,31 @@ function ServiceDemo() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="empty-row">
-                  <td colSpan="5">{language === 'ar' ? 'لا توجد طلبات سفر سابقة' : 'No previous travel requests'}</td>
-                </tr>
+                {previousRequests.map((request) => (
+                  <tr key={request.id}>
+                    <td className="request-id">{request.id}</td>
+                    <td>{request.destination}</td>
+                    <td>{request.duration}</td>
+                    <td>{request.amount} {language === 'ar' ? 'ر.س' : 'SAR'}</td>
+                    <td>
+                      <span className={`status-badge ${request.statusClass}`}>
+                        {request.status}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="action-btn view-btn">
+                        {language === 'ar' ? 'عرض' : 'View'}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
 
           {/* Table Footer */}
           <div className="absher-table-footer">
-            <span>{language === 'ar' ? 'السجلات الظاهرة: 0 إلى 0 من أصل 0' : 'Showing: 0 to 0 of 0 records'}</span>
+            <span>{language === 'ar' ? `السجلات الظاهرة: 1 إلى ${previousRequests.length} من أصل ${previousRequests.length}` : `Showing: 1 to ${previousRequests.length} of ${previousRequests.length} records`}</span>
             <div className="absher-pagination">
               <button disabled>{language === 'ar' ? 'السابق' : 'Previous'}</button>
               <button disabled>{language === 'ar' ? 'التالي' : 'Next'}</button>
