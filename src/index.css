@@ -520,6 +520,150 @@ input, select, textarea {
   stroke: white;
 }
 
+/* ========================================
+   MOBILE RESPONSIVE HEADER (Absher Style)
+   ======================================== */
+
+/* Mobile Language Toggle - Center button like Absher */
+.mobile-lang-toggle {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.mobile-lang-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--color-primary);
+}
+
+/* Government Logos (Left side in RTL) */
+.header-gov-logos {
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-gov-logos .moi-logo {
+  height: 36px;
+  width: auto;
+}
+
+.header-gov-logos .vision-logo {
+  height: 32px;
+  width: auto;
+}
+
+/* Desktop only elements */
+.desktop-only {
+  display: flex;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  display: none;
+}
+
+/* Mobile Styles - Match Absher Exactly */
+@media (max-width: 900px) {
+  .absher-header {
+    padding: 12px 0;
+    background: white;
+    border-bottom: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  /* Right Side - Absher Logo only */
+  .header-logos {
+    order: 3;
+    gap: 0;
+  }
+
+  .header-logos .vision-logo {
+    display: none;
+  }
+
+  .absher-logo {
+    width: 28px;
+    height: 42px;
+    color: var(--color-primary);
+  }
+
+  /* Center - Language Toggle */
+  .mobile-lang-toggle {
+    display: flex;
+    order: 2;
+  }
+
+  /* Left Side - MOI + Vision Logos */
+  .header-gov-logos {
+    display: flex;
+    order: 1;
+  }
+
+  /* Hide full navigation on mobile */
+  .header-nav-buttons {
+    display: none !important;
+  }
+
+  /* Hide old MOI logo container */
+  .header-moi-logo {
+    display: none;
+  }
+
+  /* Hide desktop lang button */
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .absher-logo {
+    width: 24px;
+    height: 36px;
+  }
+
+  .header-gov-logos .moi-logo {
+    height: 30px;
+  }
+
+  .header-gov-logos .vision-logo {
+    height: 26px;
+  }
+
+  .mobile-lang-toggle {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .mobile-lang-toggle svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
 /* Old classes for backward compatibility */
 .header-logo {
   display: flex;
