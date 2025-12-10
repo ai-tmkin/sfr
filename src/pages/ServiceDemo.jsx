@@ -54,12 +54,6 @@ function ServiceDemo() {
     { number: 5, label: language === 'ar' ? 'إصدار التصريح' : 'Issue Permit' },
   ]
 
-  const sidebarItems = [
-    { icon: <FileText size={20} />, label: language === 'ar' ? 'الخدمات الإلكترونية' : 'E-Services', active: true },
-    { icon: <ClipboardList size={20} />, label: language === 'ar' ? 'التفاويض' : 'Authorizations', active: false },
-    { icon: <FileText size={20} />, label: language === 'ar' ? 'استبيانات أبشر' : 'Absher Surveys', active: false },
-  ]
-
   // Previous travel requests data
   const previousRequests = [
     {
@@ -74,8 +68,8 @@ function ServiceDemo() {
     {
       id: 'TR-2024-38901',
       destination: language === 'ar' ? 'عمّان، الأردن' : 'Amman, Jordan',
-      duration: language === 'ar' ? '4 أيام' : '4 days',
-      amount: '15,000',
+      duration: language === 'ar' ? '6 أيام' : '6 days',
+      amount: '22,500',
       status: language === 'ar' ? 'مكتمل' : 'Completed',
       statusClass: 'completed',
       date: '2024-06-20'
@@ -630,25 +624,8 @@ function ServiceDemo() {
     <div className="absher-service-page">
       {/* Main Layout */}
       <div className="absher-main-layout">
-        {/* Sidebar */}
-        <aside className="absher-sidebar">
-          <div className="sidebar-header">
-            <FileText size={20} />
-            <span>{language === 'ar' ? 'الخدمات الإلكترونية' : 'E-Services'}</span>
-            <ChevronIcon size={16} />
-          </div>
-          <nav className="sidebar-nav">
-            {sidebarItems.map((item, index) => (
-              <a key={index} className={`sidebar-item ${item.active ? 'active' : ''}`}>
-                {item.icon}
-                <span>{item.label}</span>
-              </a>
-            ))}
-          </nav>
-        </aside>
-
         {/* Content Area */}
-        <main className="absher-content">
+        <main className="absher-content full-width">
           {/* Breadcrumb */}
           <div className="absher-breadcrumb">
             <Link to="/home">{language === 'ar' ? 'الخدمات الإلكترونية' : 'E-Services'}</Link>

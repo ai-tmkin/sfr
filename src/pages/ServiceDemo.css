@@ -191,6 +191,12 @@
   margin-left: 24px;
 }
 
+/* Full width content (no sidebar) */
+.absher-content.full-width {
+  margin: 0 !important;
+  max-width: 100%;
+}
+
 /* Content Title Header */
 .content-title-header {
   display: flex;
