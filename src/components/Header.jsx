@@ -92,11 +92,16 @@ function Header() {
   return (
     <header className="absher-header">
       <div className="header-container">
-        {/* Right Side - Absher Logo (RTL) */}
+        {/* Right Side - Absher Logo + Vision 2030 (RTL) */}
         <div className="header-logos">
           <Link to="/home" className="logo-link">
             <AbsherLogo />
           </Link>
+          <img 
+            src="https://www.absher.sa/portal/landing/img/vission-logo.png" 
+            alt="Vision 2030" 
+            className="vision-logo"
+          />
         </div>
 
         {/* Center - Language Toggle (Mobile) / Nav Buttons (Desktop) */}

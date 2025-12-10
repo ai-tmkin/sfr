@@ -548,19 +548,19 @@ input, select, textarea {
 
 /* Government Logos (Left side in RTL) */
 .header-gov-logos {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .header-gov-logos .moi-logo {
-  height: 36px;
+  height: 50px;
   width: auto;
 }
 
+/* Hide Vision in gov-logos on desktop (it's in header-logos) */
 .header-gov-logos .vision-logo {
-  height: 32px;
-  width: auto;
+  display: none;
 }
 
 /* Desktop only elements */
@@ -616,6 +616,16 @@ input, select, textarea {
   .header-gov-logos {
     display: flex;
     order: 1;
+  }
+
+  .header-gov-logos .moi-logo {
+    height: 36px;
+  }
+
+  /* Show Vision in gov-logos on mobile */
+  .header-gov-logos .vision-logo {
+    display: block;
+    height: 32px;
   }
 
   /* Hide full navigation on mobile */
