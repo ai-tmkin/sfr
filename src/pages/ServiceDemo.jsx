@@ -457,49 +457,91 @@ function ServiceDemo() {
     </div>
   )
 
-  // Permit Preview Modal
+  // Calculate return date based on days
+  const getReturnDate = () => {
+    const date = new Date()
+    date.setDate(date.getDate() + days)
+    return date.toLocaleDateString('en-CA').replace(/-/g, '/')
+  }
+
+  // Permit Preview Modal - Redesigned
   const renderPermitPreview = () => (
     <div className="permit-modal-overlay" onClick={() => setShowPermitPreview(false)}>
-      <div className="permit-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="permit-modal-header">
-          <h3>{language === 'ar' ? 'تصريح السفر' : 'Travel Permit'}</h3>
-          <button onClick={() => setShowPermitPreview(false)}>×</button>
+      <div className="permit-modal-new" onClick={(e) => e.stopPropagation()}>
+        {/* Success Header */}
+        <div className="permit-success-header">
+          <div className="success-icon">
+            <Check size={40} strokeWidth={3} />
+          </div>
+          <h2 className="success-title">
+            {language === 'ar' ? 'تم إصدار تصريح السفر بنجاح' : 'Travel Permit Issued Successfully'}
+          </h2>
+          <p className="success-subtitle">
+            {language === 'ar' 
+              ? `يمكنك الآن السفر. تم رفع حظر السفر مؤقتاً لمدة ${days} يوم.`
+              : `You can now travel. The travel ban has been temporarily lifted for ${days} days.`}
+          </p>
         </div>
-        <div className="permit-document">
-          <div className="permit-doc-header">
-            <div className="ministry-info">
-              <h4>{language === 'ar' ? 'المملكة العربية السعودية' : 'Kingdom of Saudi Arabia'}</h4>
-              <p>{language === 'ar' ? 'وزارة الداخلية' : 'Ministry of Interior'}</p>
-            </div>
-            <AbsherLogoLoader />
+
+        {/* Permit Card */}
+        <div className="permit-card">
+          {/* QR Code Section */}
+          <div className="permit-qr-section">
+            <img 
+              src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://absher.sa/verify/TR-2025-88992"
+              alt="QR Code"
+              className="permit-qr-code"
+            />
           </div>
-          <div className="permit-doc-body">
-            <h3>{language === 'ar' ? 'تصريح سفر مؤقت' : 'Temporary Travel Permit'}</h3>
-            <p className="permit-number">SFR-2024-88992</p>
-            <div className="permit-details">
-              <div className="permit-row">
-                <span>{language === 'ar' ? 'الاسم:' : 'Name:'}</span>
-                <span>{DEBTOR_NAME}</span>
+
+          {/* Permit Details Section */}
+          <div className="permit-details-section">
+            <div className="permit-badge">
+              {language === 'ar' ? 'تصريح رسمي' : 'Official Permit'}
+            </div>
+            
+            <div className="permit-info-grid">
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'رقم التصريح' : 'Permit Number'}</span>
+                <span className="permit-value permit-number">TR-2025-88992</span>
               </div>
-              <div className="permit-row">
-                <span>{language === 'ar' ? 'الوجهة:' : 'Destination:'}</span>
-                <span>{destination}</span>
+              
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'اسم المسافر' : 'Traveler Name'}</span>
+                <span className="permit-value">{DEBTOR_NAME}</span>
               </div>
-              <div className="permit-row">
-                <span>{language === 'ar' ? 'المدة:' : 'Duration:'}</span>
-                <span>{days} {language === 'ar' ? 'يوم' : 'days'}</span>
+              
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'الوجهة' : 'Destination'}</span>
+                <span className="permit-value">{destination}</span>
+              </div>
+              
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'تاريخ العودة الالزامي' : 'Mandatory Return Date'}</span>
+                <span className="permit-value permit-date">{getReturnDate()}</span>
+              </div>
+              
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'الضامن' : 'Guarantor'}</span>
+                <span className="permit-value">{GUARANTOR_NAME}</span>
+              </div>
+              
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'حالة السداد' : 'Payment Status'}</span>
+                <span className="permit-value permit-status">{language === 'ar' ? 'مجدول تلقائياً' : 'Automatically Scheduled'}</span>
               </div>
             </div>
-          </div>
-          <div className="permit-doc-footer">
-            <div className="qr-placeholder">QR</div>
-            <p>{language === 'ar' ? 'للتحقق، امسح رمز QR' : 'Scan QR to verify'}</p>
           </div>
         </div>
-        <div className="permit-modal-actions">
+
+        {/* Action Buttons */}
+        <div className="permit-modal-buttons">
+          <Link to="/home" className="absher-secondary-btn" onClick={() => setShowPermitPreview(false)}>
+            {language === 'ar' ? 'العودة للرئيسية' : 'Back to Home'}
+          </Link>
           <button className="absher-primary-btn">
-            <Printer size={16} />
-            {language === 'ar' ? 'طباعة' : 'Print'}
+            <FileText size={18} />
+            {language === 'ar' ? 'عرض وطباعة التصريح' : 'View & Print Permit'}
           </button>
         </div>
       </div>
