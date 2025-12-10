@@ -51,12 +51,34 @@ const LogoutIcon = () => (
   </svg>
 )
 
+// Menu Icon (Hamburger)
+const MenuIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
+)
+
+// Close Icon
+const CloseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+)
+
 function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   const { language, toggleLanguage } = useLanguage()
   
   const userName = language === 'ar' ? 'أحمد محمد' : 'Ahmed Mohammed'
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+  }
   
   return (
     <header className="absher-header">
@@ -69,18 +91,18 @@ function Header() {
           <img 
             src="https://www.absher.sa/portal/landing/img/vission-logo.png" 
             alt="Vision 2030" 
-            className="vision-logo"
+            className="vision-logo desktop-vision"
           />
         </div>
 
-        {/* Center - Language Toggle (Mobile Only) */}
+        {/* Mobile: Language Toggle (Center) */}
         <button className="mobile-lang-toggle" onClick={toggleLanguage}>
           <GlobeIcon />
           <span>{language === 'ar' ? 'English' : 'العربية'}</span>
         </button>
 
         {/* Desktop Navigation */}
-        <div className="header-nav-buttons">
+        <div className="header-nav-buttons desktop-nav">
           {/* User Profile */}
           <div className="user-section">
             <div className="user-avatar">
@@ -129,7 +151,7 @@ function Header() {
           </button>
         </div>
 
-        {/* Left Side - MOI Logo + Vision 2030 */}
+        {/* Left Side - MOI Logo + Vision 2030 (for mobile) */}
         <div className="header-gov-logos">
           <img 
             src="https://www.absher.sa/portal/landing/img/moi-logo.svg?MOD=AJPERES" 
@@ -139,10 +161,78 @@ function Header() {
           <img 
             src="https://www.absher.sa/portal/landing/img/vission-logo.png" 
             alt="Vision 2030" 
-            className="vision-logo"
+            className="vision-logo mobile-vision"
           />
         </div>
+
+        {/* Mobile Menu Toggle Button */}
+        <button 
+          className="mobile-menu-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-overlay" onClick={closeMobileMenu}>
+          <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+            {/* User Info */}
+            <div className="mobile-user-section">
+              <div className="user-avatar">
+                <span>{language === 'ar' ? 'أ' : 'A'}</span>
+              </div>
+              <span className="user-name">{userName}</span>
+            </div>
+
+            {/* Navigation Links */}
+            <Link 
+              to="/home" 
+              className={`mobile-nav-link ${location.pathname === '/home' || location.pathname === '/' ? 'active' : ''}`}
+              onClick={closeMobileMenu}
+            >
+              <DashboardIcon />
+              <span>{language === 'ar' ? 'الرئيسية' : 'Home'}</span>
+            </Link>
+
+            <Link 
+              to="/servicedemo" 
+              className={`mobile-nav-link ${location.pathname === '/servicedemo' ? 'active' : ''}`}
+              onClick={closeMobileMenu}
+            >
+              <PlaneIcon />
+              <span>{language === 'ar' ? 'أبشر سفر' : 'Absher Safar'}</span>
+            </Link>
+
+            <Link 
+              to="/settings" 
+              className={`mobile-nav-link ${location.pathname === '/settings' ? 'active' : ''}`}
+              onClick={closeMobileMenu}
+            >
+              <SettingsIcon />
+              <span>{language === 'ar' ? 'الإعدادات' : 'Settings'}</span>
+            </Link>
+
+            <button 
+              className="mobile-nav-link"
+              onClick={() => { toggleLanguage(); closeMobileMenu(); }}
+            >
+              <GlobeIcon />
+              <span>{language === 'ar' ? 'English' : 'العربية'}</span>
+            </button>
+
+            <button 
+              className="mobile-nav-link logout"
+              onClick={() => { navigate('/'); closeMobileMenu(); }}
+            >
+              <LogoutIcon />
+              <span>{language === 'ar' ? 'خروج' : 'Logout'}</span>
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

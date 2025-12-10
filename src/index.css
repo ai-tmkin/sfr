@@ -544,7 +544,7 @@ input, select, textarea {
 
 /* Government Logos (Left side in RTL) */
 .header-gov-logos {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 12px;
 }
@@ -554,22 +554,124 @@ input, select, textarea {
   width: auto;
 }
 
-/* Hide Vision in gov-logos on desktop (it's in header-logos) */
-.header-gov-logos .vision-logo {
+/* Hide mobile vision on desktop */
+.mobile-vision {
   display: none;
 }
 
-/* Desktop only elements */
-.desktop-only {
-  display: flex;
+/* Mobile Menu Toggle - Hidden on desktop */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--color-primary);
 }
 
 /* Mobile Menu Overlay */
 .mobile-menu-overlay {
   display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
-/* Mobile Styles - Match Absher Exactly */
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 85%;
+  height: 100%;
+  background: white;
+  padding: 20px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+[dir="ltr"] .mobile-menu {
+  right: auto;
+  left: 0;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-user-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background: var(--color-primary);
+  border-radius: 12px;
+  color: white;
+}
+
+.mobile-user-section .user-avatar {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.mobile-user-section .user-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  transition: all 0.2s;
+  background: none;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.mobile-nav-link:hover {
+  background: #f5f5f5;
+}
+
+.mobile-nav-link.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.mobile-nav-link.active svg {
+  stroke: white;
+}
+
+.mobile-nav-link svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--color-primary);
+}
+
+.mobile-nav-link.logout {
+  color: #dc3545;
+  margin-top: 16px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.mobile-nav-link.logout svg {
+  stroke: #dc3545;
+}
+
+/* Mobile Styles */
 @media (max-width: 900px) {
   .absher-header {
     padding: 12px 0;
@@ -586,13 +688,13 @@ input, select, textarea {
     gap: 12px;
   }
 
-  /* Right Side - Absher Logo only */
+  /* Right Side - Absher Logo only (RTL) */
   .header-logos {
     order: 3;
     gap: 0;
   }
 
-  .header-logos .vision-logo {
+  .header-logos .desktop-vision {
     display: none;
   }
 
@@ -618,25 +720,30 @@ input, select, textarea {
     height: 36px;
   }
 
-  /* Show Vision in gov-logos on mobile */
-  .header-gov-logos .vision-logo {
+  .header-gov-logos .mobile-vision {
     display: block;
     height: 32px;
   }
 
-  /* Hide full navigation on mobile */
-  .header-nav-buttons {
+  /* Hide full desktop navigation on mobile */
+  .desktop-nav {
     display: none !important;
+  }
+
+  /* Show mobile menu toggle */
+  .mobile-menu-toggle {
+    display: flex;
+    order: 4;
+  }
+
+  /* Show mobile menu overlay when open */
+  .mobile-menu-overlay {
+    display: block;
   }
 
   /* Hide old MOI logo container */
   .header-moi-logo {
     display: none;
-  }
-
-  /* Hide desktop lang button */
-  .desktop-only {
-    display: none !important;
   }
 }
 
@@ -655,7 +762,7 @@ input, select, textarea {
     height: 30px;
   }
 
-  .header-gov-logos .vision-logo {
+  .header-gov-logos .mobile-vision {
     height: 26px;
   }
 
@@ -667,6 +774,10 @@ input, select, textarea {
   .mobile-lang-toggle svg {
     width: 14px;
     height: 14px;
+  }
+  
+  .mobile-menu {
+    width: 260px;
   }
 }
 
@@ -1460,37 +1571,47 @@ input, select, textarea {
 }
 
 @media (max-width: 768px) {
-  .header-container {
+  /* Footer Mobile Styles */
+  .footer-container {
+    flex-direction: column !important;
+    padding: 0 16px;
+  }
+  
+  .footer-brand-column {
     flex-direction: column;
+    align-items: center;
+    width: 100%;
     gap: 16px;
   }
   
-  .header-logos {
-    order: 1;
+  .brand-logo-phone {
+    width: auto;
+    padding: 16px 24px;
   }
   
-  .header-nav-buttons {
-    order: 2;
+  .app-downloads-v2 {
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
+    gap: 8px;
   }
   
-  .user-section {
-    order: -1;
-  }
-  
-  .nav-btn {
-    flex: 0 0 auto;
+  .app-downloads-v2 img {
+    max-width: 120px;
   }
   
   .footer-links-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr !important;
     gap: 24px;
+    text-align: center;
   }
   
   .footer-link-column {
     text-align: center;
+  }
+  
+  .footer-link-column h4 {
+    margin-bottom: 12px;
   }
   
   .social-icons-row,
@@ -1501,8 +1622,18 @@ input, select, textarea {
   .footer-copyright-v2 .footer-container {
     flex-direction: column;
     text-align: center;
+    gap: 12px;
   }
   
+  .copyright-links {
+    justify-content: center;
+  }
+  
+  .nic-logo {
+    justify-content: center;
+  }
+  
+  /* Stepper Mobile */
   .stepper {
     flex-wrap: wrap;
     gap: 16px;
@@ -1523,5 +1654,27 @@ input, select, textarea {
   
   .gov-logos {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-main-v2 {
+    padding: 24px 0;
+  }
+  
+  .footer-links-container {
+    gap: 20px;
+  }
+  
+  .footer-link-column ul li {
+    margin-bottom: 10px;
+  }
+  
+  .app-downloads-v2 img {
+    max-width: 100px;
+  }
+  
+  .registered-badge img {
+    height: 30px;
   }
 }
