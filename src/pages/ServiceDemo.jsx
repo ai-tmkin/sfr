@@ -227,9 +227,10 @@ function ServiceDemo() {
               <input
                 type="number"
                 value={days}
-                min={1}
-                onChange={(e) => setDays(parseInt(e.target.value) || 1)}
+                min={5}
+                onChange={(e) => setDays(Math.max(5, parseInt(e.target.value) || 5))}
               />
+              <small className="form-hint">{language === 'ar' ? 'الحد الأدنى 5 أيام' : 'Minimum 5 days'}</small>
             </div>
           </div>
 

@@ -677,6 +677,12 @@
   border-color: var(--color-primary);
 }
 
+.absher-form-group .form-hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
 /* Cost Summary */
 .absher-cost-summary {
   background: white;
