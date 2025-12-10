@@ -542,9 +542,9 @@ input, select, textarea {
   stroke: var(--color-primary);
 }
 
-/* Government Logos (Left side in RTL) */
+/* Government Logos (Left side in RTL) - MOI Logo */
 .header-gov-logos {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 12px;
 }
@@ -688,9 +688,9 @@ input, select, textarea {
     gap: 12px;
   }
 
-  /* Right Side - Absher Logo only (RTL) */
+  /* Left Side - Absher Logo only (RTL) - swapped for mobile */
   .header-logos {
-    order: 3;
+    order: 1;
     gap: 0;
   }
 
@@ -710,10 +710,10 @@ input, select, textarea {
     order: 2;
   }
 
-  /* Left Side - MOI + Vision Logos */
+  /* Right Side - MOI + Vision Logos (RTL) - swapped for mobile */
   .header-gov-logos {
     display: flex;
-    order: 1;
+    order: 3;
   }
 
   .header-gov-logos .moi-logo {
