@@ -18,7 +18,7 @@ const GlobeIcon = () => (
   </svg>
 )
 
-// Navigation Icons (matching Absher design)
+// Navigation Icons
 const DashboardIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
     <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -28,27 +28,10 @@ const DashboardIcon = () => (
   </svg>
 )
 
-const UserEditIcon = () => (
+// Plane Icon for Absher Safar
+const PlaneIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <circle cx="9" cy="7" r="4" />
-    <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
-    <line x1="16" y1="3" x2="22" y2="3" />
-    <line x1="16" y1="7" x2="22" y2="7" />
-    <line x1="18" y1="11" x2="22" y2="11" />
-  </svg>
-)
-
-const NotificationIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-  </svg>
-)
-
-const ServiceGuideIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
   </svg>
 )
 
@@ -60,34 +43,12 @@ const LogoutIcon = () => (
   </svg>
 )
 
-// Hamburger Menu Icon
-const MenuIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <line x1="3" y1="6" x2="21" y2="6" />
-    <line x1="3" y1="12" x2="21" y2="12" />
-    <line x1="3" y1="18" x2="21" y2="18" />
-  </svg>
-)
-
-// Close Icon
-const CloseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <line x1="18" y1="6" x2="6" y2="18" />
-    <line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-)
-
 function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
-  const { t, language, toggleLanguage } = useLanguage()
+  const { language, toggleLanguage } = useLanguage()
   
-  const userName = language === 'ar' ? 'أحمد' : 'Ahmed'
-
-  const handleNavClick = () => {
-    setMobileMenuOpen(false)
-  }
+  const userName = language === 'ar' ? 'أحمد محمد' : 'Ahmed Mohammed'
   
   return (
     <header className="absher-header">
@@ -104,14 +65,14 @@ function Header() {
           />
         </div>
 
-        {/* Center - Language Toggle (Mobile) / Nav Buttons (Desktop) */}
+        {/* Center - Language Toggle (Mobile Only) */}
         <button className="mobile-lang-toggle" onClick={toggleLanguage}>
           <GlobeIcon />
           <span>{language === 'ar' ? 'English' : 'العربية'}</span>
         </button>
 
         {/* Desktop Navigation */}
-        <div className={`header-nav-buttons ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+        <div className="header-nav-buttons">
           {/* User Profile */}
           <div className="user-section">
             <div className="user-avatar">
@@ -120,52 +81,34 @@ function Header() {
             <span className="user-name">{userName}</span>
           </div>
 
-          {/* Dashboard Button */}
+          {/* Dashboard */}
           <Link 
             to="/home" 
             className={`nav-btn ${location.pathname === '/home' || location.pathname === '/' ? 'active' : ''}`}
-            onClick={handleNavClick}
           >
             <DashboardIcon />
-            <span>{language === 'ar' ? 'لوحة المعلومات' : 'Dashboard'}</span>
+            <span>{language === 'ar' ? 'الرئيسية' : 'Home'}</span>
           </Link>
 
-          {/* Edit User Info */}
-          <button className="nav-btn" onClick={handleNavClick}>
-            <UserEditIcon />
-            <span>{language === 'ar' ? 'تعديل معلومات المستخدم' : 'Edit User Info'}</span>
-          </button>
-
-          {/* Service Guide */}
+          {/* Absher Safar - Main Service */}
           <Link 
             to="/servicedemo" 
             className={`nav-btn ${location.pathname === '/servicedemo' ? 'active' : ''}`}
-            onClick={handleNavClick}
           >
-            <ServiceGuideIcon />
-            <span>{language === 'ar' ? 'دليل الخدمات' : 'Service Guide'}</span>
+            <PlaneIcon />
+            <span>{language === 'ar' ? 'أبشر سفر' : 'Absher Safar'}</span>
           </Link>
 
-          {/* Notifications */}
-          <Link 
-            to="/settings" 
-            className={`nav-btn ${location.pathname === '/settings' ? 'active' : ''}`}
-            onClick={handleNavClick}
-          >
-            <NotificationIcon />
-            <span>{language === 'ar' ? 'الاشعارات' : 'Notifications'}</span>
-          </Link>
-
-          {/* Language Toggle (Desktop) */}
-          <button className="nav-btn lang-btn desktop-only" onClick={() => { toggleLanguage(); handleNavClick(); }}>
+          {/* Language Toggle */}
+          <button className="nav-btn lang-btn" onClick={toggleLanguage}>
             <GlobeIcon />
             <span>{language === 'ar' ? 'English' : 'العربية'}</span>
           </button>
 
           {/* Logout */}
-          <button className="nav-btn logout-btn" onClick={handleNavClick}>
+          <button className="nav-btn logout-btn" onClick={() => navigate('/')}>
             <LogoutIcon />
-            <span>{language === 'ar' ? 'تسجيل الخروج' : 'Logout'}</span>
+            <span>{language === 'ar' ? 'خروج' : 'Logout'}</span>
           </button>
         </div>
 
@@ -183,11 +126,6 @@ function Header() {
           />
         </div>
       </div>
-
-      {/* Mobile menu overlay */}
-      {mobileMenuOpen && (
-        <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)} />
-      )}
     </header>
   )
 }
