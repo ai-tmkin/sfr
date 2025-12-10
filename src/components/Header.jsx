@@ -1,0 +1,145 @@
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLanguage } from '../context/LanguageContext'
+
+// Absher Logo SVG
+const AbsherLogo = () => (
+  <svg className="absher-logo" xmlns="http://www.w3.org/2000/svg" width="37" height="55" viewBox="0 0 37 55" fill="none">
+    <path fillRule="evenodd" clipRule="evenodd" d="M32.7429 4.21435H36.9704V0.0148506C34.8147 -0.209123 32.4629 2.1426 32.7429 4.21435ZM36.9998 6.03393V6.56586V46.3491C36.9998 47.385 36.6358 47.9449 35.6279 48.0569C34.964 48.135 34.2865 48.1178 33.5954 48.1002C33.2956 48.0926 32.9932 48.0849 32.6883 48.0849V47.581V7.82571C32.6883 6.73384 33.0802 6.17391 34.1161 6.06192C34.7614 5.98371 35.434 6.00109 36.1148 6.01869C36.4088 6.02629 36.7043 6.03393 36.9998 6.03393ZM4.38271 16.8685V17.4844V53.0962C4.38271 54.356 3.85077 54.916 2.59092 54.972C2.24105 54.9859 1.89117 54.986 1.5413 54.986H1.54101C1.19107 54.986 0.841121 54.986 0.491175 55C0.211208 55 0.0712224 54.888 0.099219 54.608V54.188V19.0522C0.099219 17.5404 0.51917 16.9525 2.28296 16.8965C2.76279 16.8548 3.27371 16.8597 3.81571 16.8649H3.81577C4.00111 16.8667 4.19009 16.8685 4.38271 16.8685ZM30.4328 10.3383V10.3382V10.3382V10.3382V10.3382V10.3382V10.3381V10.3381V10.3381C30.4255 10.2335 30.4181 10.1253 30.4181 10.0096C30.1316 10.0096 29.8549 10.0064 29.5846 10.0032H29.5846H29.5845H29.5845H29.5845H29.5844H29.5844H29.5844H29.5843C29.0623 9.99706 28.5643 9.99119 28.0664 10.0096C26.6105 10.0936 26.1626 10.6256 26.1626 12.0534V47.0212C26.1626 47.1062 26.1658 47.1912 26.1689 47.2752L26.1689 47.2753C26.1751 47.4401 26.1811 47.6008 26.1626 47.7491C26.1346 48.0571 26.2466 48.1691 26.5545 48.1691C26.8905 48.1551 27.2335 48.1551 27.5764 48.1551C27.9194 48.1551 28.2623 48.1551 28.5983 48.1411C29.9141 48.0851 30.4461 47.5252 30.4461 46.2373V10.6256C30.4461 10.5309 30.4395 10.4363 30.4328 10.3385V10.3385V10.3385V10.3384V10.3384V10.3384V10.3383V10.3383V10.3383ZM17.457 16.8968V17.5127V46.1813C17.457 47.4972 16.925 48.0571 15.6092 48.1131C15.1066 48.1317 14.6164 48.1255 14.1221 48.1193H14.122H14.1219H14.1218H14.1217H14.1216H14.1215H14.1212C13.8723 48.1162 13.6225 48.1131 13.3694 48.1131C13.3348 48.1131 13.3002 48.1024 13.2524 48.0876L13.2523 48.0876C13.2228 48.0784 13.1882 48.0678 13.1455 48.0571V47.4412V18.9126C13.1455 17.5127 13.5374 17.0368 14.9093 16.8688C15.3899 16.8345 15.8915 16.8528 16.4207 16.8721L16.4208 16.8721C16.7547 16.8842 17.0995 16.8968 17.457 16.8968ZM23.9535 17.457V16.8691C23.1976 16.8691 22.5257 16.8691 21.8818 16.9251C19.95 16.9811 19.642 17.653 19.642 19.1368V47.3574V47.7774C19.614 48.0574 19.754 48.1693 20.034 48.1693C20.398 48.1553 20.7549 48.1553 21.1119 48.1553C21.4688 48.1553 21.8258 48.1553 22.1897 48.1413C23.4216 48.0854 23.9535 47.5254 23.9535 46.3216V17.457ZM6.62457 48.1411V47.4132V18.8846C6.62457 17.5128 6.96053 17.0648 8.33236 16.8968C8.93066 16.837 9.52895 16.8482 10.1374 16.8596H10.1374H10.1374H10.1374H10.1374H10.1375L10.1377 16.8596C10.3833 16.8642 10.6305 16.8688 10.8801 16.8688C10.8801 16.9706 10.8876 17.0724 10.8949 17.1702C10.9016 17.2608 10.9081 17.348 10.9081 17.4288V46.2373C10.9081 47.4972 10.3761 48.0571 9.14427 48.0851C8.33236 48.1411 7.52046 48.1411 6.62457 48.1411ZM6.53903 12.2773C6.53903 13.4811 7.51891 14.461 8.75076 14.461C10.0106 14.461 10.9625 13.5091 10.9905 12.3053C10.9905 11.0454 10.0106 10.0375 8.77876 10.0375C7.54691 10.0095 6.53903 11.0454 6.53903 12.2773ZM21.7975 14.461C20.5377 14.461 19.5858 13.5091 19.5858 12.2212C19.5858 10.9894 20.5937 10.0095 21.7975 10.0095C23.0294 10.0095 24.0373 11.0454 24.0093 12.2772C24.0093 13.4811 23.0294 14.461 21.7975 14.461ZM13.0341 12.2773C13.0621 13.5091 14.042 14.461 15.2738 14.461C16.5057 14.461 17.4855 13.5091 17.4855 12.3053C17.5135 11.0734 16.5057 10.0375 15.2738 10.0375C14.042 10.0095 13.0341 11.0454 13.0341 12.2773ZM30.4209 52.1724C30.4209 53.3762 29.413 54.3841 28.2092 54.3841C26.9773 54.3841 25.9695 53.3762 25.9695 52.1444C25.9695 50.9125 26.9493 49.9606 28.1812 49.9606C29.469 49.9606 30.4209 50.9125 30.4209 52.1724Z" fill="currentColor"></path>
+  </svg>
+)
+
+// Navigation Icons (matching Absher design)
+const DashboardIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <rect x="14" y="14" width="7" height="7" rx="1" />
+  </svg>
+)
+
+const UserEditIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <circle cx="9" cy="7" r="4" />
+    <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+    <line x1="16" y1="3" x2="22" y2="3" />
+    <line x1="16" y1="7" x2="22" y2="7" />
+    <line x1="18" y1="11" x2="22" y2="11" />
+  </svg>
+)
+
+const NotificationIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+  </svg>
+)
+
+const ServiceGuideIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+  </svg>
+)
+
+const LanguageIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <text x="6" y="18" fontSize="16" fontFamily="Arial" fontWeight="bold">ع</text>
+    <text x="15" y="10" fontSize="8" fontFamily="Arial" fontWeight="bold">E</text>
+  </svg>
+)
+
+const LogoutIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+    <polyline points="16,17 21,12 16,7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+)
+
+function Header() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { t, language, toggleLanguage } = useLanguage()
+  
+  const userName = language === 'ar' ? 'أحمد' : 'Ahmed'
+  
+  return (
+    <header className="absher-header">
+      <div className="header-container">
+        {/* Right Side - Logos */}
+        <div className="header-logos">
+          <Link to="/home" className="logo-link">
+            <AbsherLogo />
+          </Link>
+          <img 
+            src="https://www.absher.sa/portal/landing/img/vission-logo.png" 
+            alt="Vision 2030" 
+            className="vision-logo"
+          />
+        </div>
+
+        {/* Center - Navigation Buttons */}
+        <div className="header-nav-buttons">
+          {/* User Profile */}
+          <div className="user-section">
+            <div className="user-avatar">
+              <span>{language === 'ar' ? 'أ' : 'A'}</span>
+            </div>
+            <span className="user-name">{userName}</span>
+          </div>
+
+          {/* Dashboard Button */}
+          <Link 
+            to="/home" 
+            className={`nav-btn ${location.pathname === '/home' || location.pathname === '/' ? 'active' : ''}`}
+          >
+            <DashboardIcon />
+            <span>{language === 'ar' ? 'لوحة المعلومات' : 'Dashboard'}</span>
+          </Link>
+
+          {/* Edit User Info */}
+          <button className="nav-btn">
+            <UserEditIcon />
+            <span>{language === 'ar' ? 'تعديل معلومات المستخدم' : 'Edit User Info'}</span>
+          </button>
+
+          {/* Service Guide */}
+          <Link to="/servicedemo" className={`nav-btn ${location.pathname === '/servicedemo' ? 'active' : ''}`}>
+            <ServiceGuideIcon />
+            <span>{language === 'ar' ? 'دليل الخدمات' : 'Service Guide'}</span>
+          </Link>
+
+          {/* Notifications */}
+          <Link to="/settings" className={`nav-btn ${location.pathname === '/settings' ? 'active' : ''}`}>
+            <NotificationIcon />
+            <span>{language === 'ar' ? 'الاشعارات' : 'Notifications'}</span>
+          </Link>
+
+          {/* Language Toggle */}
+          <button className="nav-btn lang-btn" onClick={toggleLanguage}>
+            <LanguageIcon />
+            <span>{language === 'ar' ? 'English' : 'العربية'}</span>
+          </button>
+
+          {/* Logout */}
+          <button className="nav-btn logout-btn">
+            <LogoutIcon />
+            <span>{language === 'ar' ? 'تسجيل الخروج' : 'Logout'}</span>
+          </button>
+        </div>
+
+        {/* Left Side - MOI Logo */}
+        <div className="header-moi-logo">
+          <img 
+            src="https://www.absher.sa/portal/landing/img/moi-logo.svg?MOD=AJPERES" 
+            alt="MOI Logo"
+            className="moi-logo"
+          />
+        </div>
+      </div>
+    </header>
+  )
+}
+
+export default Header

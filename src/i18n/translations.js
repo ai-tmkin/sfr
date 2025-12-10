@@ -1,0 +1,508 @@
+export const translations = {
+  ar: {
+    // Header
+    header: {
+      home: 'الرئيسية',
+      absherSafar: 'أبشر سفر',
+      faq: 'الأسئلة الشائعة',
+      userName: 'أحمد محمد',
+      userStatus: 'مستخدم مفعل',
+      language: 'English',
+    },
+    
+    // Footer
+    footer: {
+      brand: 'أبشر سفر',
+      brandDesc: 'خدمة مبتكرة لتمكين المدينين من السفر مع ضمان حقوق الدائنين.',
+      aboutAbsher: 'عن أبشر',
+      aboutAbsherLink: 'عن أبشر',
+      privacyPolicy: 'سياسة الخصوصية',
+      termsOfUse: 'شروط الاستخدام',
+      news: 'الأخبار',
+      contactSupport: 'التواصل والدعم',
+      contactUs: 'تواصل معنا',
+      faq: 'الأسئلة الشائعة',
+      serviceChannels: 'قنوات الخدمة',
+      importantLinks: 'روابط هامة',
+      moiPortal: 'بوابة وزارة الداخلية',
+      nationalPortal: 'البوابة الوطنية الموحدة',
+      copyright: 'جميع الحقوق محفوظة لمنصة أبشر © 2025',
+      poweredBy: 'مدعوم من مركز المعلومات الوطني',
+    },
+    
+    // Home Page
+    home: {
+      breadcrumb: {
+        home: 'الرئيسية',
+        eservices: 'الخدمات الإلكترونية',
+        absherSafar: 'خدمة أبشر سفر',
+      },
+      hero: {
+        title: 'خدمة أبشر سفر',
+        description: 'خدمة إلكترونية تتيح للمواطنين والمقيمين الصادر بحقهم منع سفر بسبب مديونيات، إمكانية السفر المؤقت مقابل ضمان مالي وجدولة سداد يومية تلقائية، مما يضمن حقوق الدائنين ويتيح المرونة للمدينين.',
+        cta: 'تنفيذ الخدمة',
+      },
+      infoCards: {
+        targetGroup: {
+          title: 'الفئة المستهدفة',
+          items: ['المواطنون والمقيمون', 'أصحاب المديونيات المتعثرة', 'الدائنون (أفراد، شركات، جهات حكومية)'],
+        },
+        duration: {
+          title: 'مدة التنفيذ',
+          value: 'فوري (بعد اكتمال الموافقات)',
+        },
+        fees: {
+          title: 'رسوم الخدمة',
+          value: 'مجانية',
+        },
+      },
+      steps: {
+        title: 'خطوات تنفيذ الخدمة',
+        step1: {
+          title: 'تقديم الطلب',
+          description: 'يقوم المدين بتقديم طلب سفر وتحديد الوجهة والمدة.',
+        },
+        step2: {
+          title: 'قبول الضامن',
+          description: 'يصل إشعار للكفيل (الضامن) للموافقة وشحن المحفظة بالمبلغ التأميني.',
+        },
+        step3: {
+          title: 'موافقة الدائن',
+          description: 'يتم إشعار الدائن بتفاصيل الرحلة والجدولة الزمنية للسداد للموافقة.',
+        },
+        step4: {
+          title: 'إصدار التصريح',
+          description: 'بعد اكتمال الموافقات، يصدر تصريح السفر وتذاكر الطيران وتلغى قيود السفر مؤقتاً.',
+        },
+      },
+      features: {
+        title: 'مميزات الخدمة',
+        items: [
+          'سداد يومي تلقائي 1% من المديونية',
+          'ضمان حقوق الدائن عبر كفالة مالية',
+          'مرونة في السفر للمدينين',
+          'ربط مباشر مع نظام ناجز ووزارة العدل',
+        ],
+      },
+      conditions: {
+        title: 'شروط الخدمة',
+        items: [
+          'وجود حساب مفعل في أبشر.',
+          'موافقة الدائن والضامن إلزامي.',
+          'شحن المحفظة بقيمة الرحلة + 50% احتياطي.',
+          'عدم وجود موانع أمنية أخرى للسفر.',
+        ],
+      },
+      vision: {
+        text: 'هذه الخدمة تأتي ضمن مبادرات تطوير التعاملات المالية وحفظ الحقوق',
+      },
+    },
+    
+    // Service Demo Page
+    serviceDemo: {
+      title: 'تنفيذ خدمة أبشر سفر',
+      subtitle: 'الرجاء إكمال الخطوات التالية للحصول على تصريح السفر',
+      steps: {
+        step1: 'بيانات الرحلة',
+        step2: 'موافقة الضامن',
+        step3: 'موافقة الدائن',
+        step4: 'شحن المحفظة',
+        step5: 'إصدار التصريح',
+      },
+      tripData: {
+        debtorInfo: 'بيانات المدين',
+        totalDebt: 'إجمالي المديونية المسجلة في ناجز:',
+        destination: 'الوجهة',
+        duration: 'مدة السفر (أيام)',
+        costCalculator: 'حساب التكلفة المتوقعة (تلقائي)',
+        dailyRate: 'القسط اليومي (1%)',
+        totalDays: 'إجمالي أيام الرحلة',
+        requiredAmount: 'المبلغ المطلوب شحنه',
+        sendToGuarantor: 'إرسال للضامن',
+        sar: 'ر.س',
+        day: 'يوم',
+      },
+      guarantorApproval: {
+        title: 'موافقة الضامن',
+        description: 'تم إرسال إشعار للضامن',
+        mockupNote: 'يظهر في الجانب محاكاة لما يراه الضامن في تطبيقه.',
+        status: 'حالة الطلب:',
+        awaiting: 'بانتظار الموافقة',
+        sendTime: 'وقت الإرسال:',
+        now: 'الآن',
+        guaranteeRequest: 'طلب كفالة سفر',
+        guaranteeNote: 'وردك طلب كفالة سفر من المدين',
+        guaranteeResponsibility: 'الموافقة تعني التزامك بسداد الدفعات اليومية.',
+        amountToGuarantee: 'المبلغ المطلوب ضمانه:',
+        acceptPledge: 'قبول وتعهد',
+        reject: 'رفض',
+      },
+      creditorApproval: {
+        title: 'موافقة الدائن',
+        description: 'تم تحويل الطلب للدائن (شركة/جهة). يظهر في الجانب محاكاة للوحة تحكم الدائن (بوابة الأعمال).',
+        guarantorAccepted: 'تم قبول الضامن',
+        guaranteeReady: 'الكفالة المالية جاهزة',
+        incomingRequests: 'الطلبات الواردة',
+        permitRequest: 'طلب تصريح سفر',
+        debtor: 'المدين:',
+        schedule: 'الجدولة: خصم يومي تلقائي (1%)',
+        expectedAmount: 'المبلغ المتوقع تحصيله:',
+        guaranteeAvailable: 'الضمان المالي متوفر في المحفظة',
+        approveSchedule: 'موافقة على الجدول',
+        new: 'جديد',
+        minutesAgo: 'منذ 2 دقيقة',
+      },
+      walletLoading: {
+        title: 'شحن المحفظة وتأكيد الضمان',
+        subtitle: 'الخطوة الأخيرة: إيداع مبلغ الضمان في المحفظة المؤمنة لإصدار التصريح',
+        walletTitle: 'محفظة الضمان الإلكتروني',
+        secure: 'آمن ومشفر',
+        amountLabel: 'المبلغ المطلوب إيداعه',
+        includesReserve: 'يشمل 50% احتياطي',
+        selectPayment: 'اختر وسيلة الدفع',
+        mada: 'مدى',
+        confirmPayment: 'تأكيد الدفع وإصدار التصريح',
+        securityNote: 'عملية الدفع مؤمنة ومشفرة بالكامل',
+      },
+      success: {
+        title: 'تم إصدار تصريح السفر بنجاح',
+        description: 'يمكنك الآن السفر. تم رفع حظر السفر مؤقتاً لمدة',
+        days: 'يوم',
+        officialPermit: 'تصريح رسمي',
+        permitNumber: 'رقم التصريح',
+        destination: 'الوجهة',
+        returnDate: 'تاريخ العودة الالزامي',
+        guarantor: 'الضامن',
+        paymentStatus: 'حالة السداد',
+        scheduled: 'مجدول تلقائياً',
+        printPermit: 'عرض وطباعة التصريح',
+        backToHome: 'العودة للرئيسية',
+      },
+      permit: {
+        preview: 'معاينة التصريح',
+        print: 'طباعة',
+        close: 'إغلاق المعاينة',
+        ksa: 'المملكة العربية السعودية',
+        ksaEn: 'Kingdom of Saudi Arabia',
+        moi: 'وزارة الداخلية',
+        moiEn: 'Ministry of Interior',
+        gdp: 'المديرية العامة للجوازات',
+        gdpEn: 'General Directorate of Passports',
+        title: 'تصريح سفر استثنائي (أبشر سفر)',
+        titleEn: 'Travel Permit for Debtors (Absher Travel)',
+        name: 'اسم المصرح له / Name',
+        idNumber: 'رقم الهوية / ID Number',
+        permitNo: 'رقم التصريح / Permit No',
+        issueDate: 'تاريخ الإصدار / Issue Date',
+        destinationLabel: 'وجهة السفر / Destination',
+        validity: 'صلاحية التصريح / Validity',
+        validityValue: 'صالح لمدة 30 يوماً من تاريخ الإصدار',
+        guarantorLabel: 'اسم الضامن / Guarantor',
+        returnDateLabel: 'تاريخ العودة الإلزامي / Return Date',
+        instructions: 'تعليمات هامة / Important Instructions:',
+        instruction1: 'هذا التصريح صالح لسفرة واحدة فقط للوجهة المحددة.',
+        instruction2: 'يجب الالتزام بالعودة قبل انتهاء المدة المحددة لتجنب الغرامات المالية.',
+        instruction3: 'يتم خصم الدفعات اليومية تلقائياً من محفظة الضامن طوال فترة السفر.',
+        instruction4: 'التأخر في العودة يوجب الخصم من احتياط المحفظة ومطالبة الضامن بالشحن لاستكمال الاحتياط.',
+        qrCode: 'رمز التحقق الرقمي',
+        electronicDoc: 'وثيقة إلكترونية معتمدة من وزارة الداخلية - لا تحتاج إلى ختم أو توقيع',
+      },
+      loading: 'جاري معالجة الطلب والتحقق من الأنظمة...',
+    },
+    
+    // FAQ Page
+    faq: {
+      title: 'الأسئلة الشائعة',
+      subtitle: 'إجابات شاملة حول خدمة أبشر سفر وآلية عملها',
+      questions: [
+        {
+          question: 'هل يمكن استرجاع جزء من المبلغ في حال العودة قبل استكمال المدة المحددة؟',
+          answer: 'لا، لا يمكن استرجاع المبالغ المدفوعة عن الأيام المتبقية، حيث يتم احتساب الرسوم والجدولة بناءً على طلب السفر الأساسي والمدة المعتمدة.',
+        },
+        {
+          question: 'ما هو عدد السفرات المسموحة في السنة؟',
+          answer: 'يسمح للمستفيد بإجراء سفرة واحدة كل شهرين كحد أقصى، لضمان التزام السداد واستقرار الوضع المالي.',
+        },
+        {
+          question: 'ماذا لو لم أجد ضامناً (كفيل)؟',
+          answer: 'في حال تعذر وجود ضامن، يمكن تقديم طلب خاص يتضمن مضاعفة نسبة السداد اليومي (لتصبح 2% بدلاً من 1%)، ويشترط في هذه الحالة موافقة الدائن الصريحة على هذا الاستثناء.',
+        },
+        {
+          question: 'هل يمكن تمديد مدة السفر بعد المغادرة؟',
+          answer: 'نعم، يتاح تمديد السفر من خلال التطبيق بشرط سداد المقابل المالي للأيام الإضافية فوراً، وموافقة الضامن على تمديد الكفالة للفترة الجديدة.',
+        },
+        {
+          question: 'كيف يتم التعامل إذا كان هناك أكثر من دائن؟',
+          answer: 'يجب الحصول على موافقة جميع الدائنين المسجلين في القائمة لإصدار التصريح. وفي حال الموافقة، يتم توزيع المبالغ المحصلة يومياً (من الاستقطاع) عليهم بالتساوي.',
+        },
+        {
+          question: 'ماذا يحدث لو لم يعد المدين في الموعد المحدد؟',
+          answer: 'في حال عدم العودة، يتحمل الضامن كافة المبالغ المتبقية من المديونية ويحل محل المدين قانونياً في المطالبات المالية، ويتم اتخاذ الإجراءات النظامية فوراً.',
+        },
+        {
+          question: 'ما هي أقصى مدة مسموحة للسفر؟',
+          answer: 'لا يوجد حد أقصى لعدد الأيام، حيث يعتمد ذلك على قدرة المدين والضامن على تغطية المقابل المالي اليومي وشحن المحفظة بالمبلغ المطلوب لكامل المدة.',
+        },
+      ],
+      support: {
+        title: 'هل لديك استفسارات أخرى؟',
+        description: 'يمكنك التواصل مع فريق الدعم الفني عبر منصة أبشر أو الاتصال بالرقم الموحد لخدمة العملاء.',
+      },
+    },
+  },
+  
+  en: {
+    // Header
+    header: {
+      home: 'Home',
+      absherSafar: 'Absher Safar',
+      faq: 'FAQ',
+      userName: 'Ahmed Mohammed',
+      userStatus: 'Active User',
+      language: 'العربية',
+    },
+    
+    // Footer
+    footer: {
+      brand: 'Absher Safar',
+      brandDesc: 'An innovative service enabling debtors to travel while ensuring creditor rights.',
+      aboutAbsher: 'About Absher',
+      aboutAbsherLink: 'About Absher',
+      privacyPolicy: 'Privacy Policy',
+      termsOfUse: 'Terms of Use',
+      news: 'News',
+      contactSupport: 'Contact & Support',
+      contactUs: 'Contact Us',
+      faq: 'FAQ',
+      serviceChannels: 'Service Channels',
+      importantLinks: 'Important Links',
+      moiPortal: 'Ministry of Interior Portal',
+      nationalPortal: 'National Unified Portal',
+      copyright: 'Copyright © 2025 Absher, Kingdom of Saudi Arabia',
+      poweredBy: 'Powered by National Information Center',
+    },
+    
+    // Home Page
+    home: {
+      breadcrumb: {
+        home: 'Home',
+        eservices: 'E-Services',
+        absherSafar: 'Absher Safar Service',
+      },
+      hero: {
+        title: 'Absher Safar Service',
+        description: 'An electronic service that allows citizens and residents with travel bans due to debts to travel temporarily in exchange for financial guarantees and automatic daily payment scheduling, ensuring creditor rights while providing flexibility for debtors.',
+        cta: 'Execute Service',
+      },
+      infoCards: {
+        targetGroup: {
+          title: 'Target Group',
+          items: ['Citizens and Residents', 'Defaulted Debtors', 'Creditors (Individuals, Companies, Government)'],
+        },
+        duration: {
+          title: 'Execution Time',
+          value: 'Instant (after approval completion)',
+        },
+        fees: {
+          title: 'Service Fees',
+          value: 'Free',
+        },
+      },
+      steps: {
+        title: 'Service Execution Steps',
+        step1: {
+          title: 'Submit Request',
+          description: 'The debtor submits a travel request specifying destination and duration.',
+        },
+        step2: {
+          title: 'Guarantor Approval',
+          description: 'The guarantor receives a notification to approve and load the wallet with the insurance amount.',
+        },
+        step3: {
+          title: 'Creditor Approval',
+          description: 'The creditor is notified with trip details and payment schedule for approval.',
+        },
+        step4: {
+          title: 'Permit Issuance',
+          description: 'After all approvals, the travel permit is issued and travel restrictions are temporarily lifted.',
+        },
+      },
+      features: {
+        title: 'Service Features',
+        items: [
+          'Automatic daily payment of 1% of debt',
+          'Creditor rights guaranteed through financial sponsorship',
+          'Travel flexibility for debtors',
+          'Direct integration with Najiz system and Ministry of Justice',
+        ],
+      },
+      conditions: {
+        title: 'Service Conditions',
+        items: [
+          'An active Absher account is required.',
+          'Creditor and guarantor approval is mandatory.',
+          'Wallet must be loaded with trip value + 50% reserve.',
+          'No other security travel restrictions.',
+        ],
+      },
+      vision: {
+        text: 'This service is part of financial transaction development and rights protection initiatives',
+      },
+    },
+    
+    // Service Demo Page
+    serviceDemo: {
+      title: 'Execute Absher Safar Service',
+      subtitle: 'Please complete the following steps to obtain your travel permit',
+      steps: {
+        step1: 'Trip Data',
+        step2: 'Guarantor Approval',
+        step3: 'Creditor Approval',
+        step4: 'Wallet Loading',
+        step5: 'Permit Issuance',
+      },
+      tripData: {
+        debtorInfo: 'Debtor Information',
+        totalDebt: 'Total debt registered in Najiz:',
+        destination: 'Destination',
+        duration: 'Travel Duration (days)',
+        costCalculator: 'Estimated Cost Calculator (Automatic)',
+        dailyRate: 'Daily Rate (1%)',
+        totalDays: 'Total Trip Days',
+        requiredAmount: 'Required Amount to Load',
+        sendToGuarantor: 'Send to Guarantor',
+        sar: 'SAR',
+        day: 'day',
+      },
+      guarantorApproval: {
+        title: 'Guarantor Approval',
+        description: 'Notification sent to guarantor',
+        mockupNote: 'The side shows a simulation of what the guarantor sees in their app.',
+        status: 'Request Status:',
+        awaiting: 'Awaiting Approval',
+        sendTime: 'Send Time:',
+        now: 'Now',
+        guaranteeRequest: 'Travel Guarantee Request',
+        guaranteeNote: 'You received a travel guarantee request from debtor',
+        guaranteeResponsibility: 'Approval means you commit to daily payments.',
+        amountToGuarantee: 'Amount to Guarantee:',
+        acceptPledge: 'Accept & Pledge',
+        reject: 'Reject',
+      },
+      creditorApproval: {
+        title: 'Creditor Approval',
+        description: 'Request forwarded to creditor. The side shows a simulation of the creditor dashboard (Business Portal).',
+        guarantorAccepted: 'Guarantor Accepted',
+        guaranteeReady: 'Financial guarantee is ready',
+        incomingRequests: 'Incoming Requests',
+        permitRequest: 'Travel Permit Request',
+        debtor: 'Debtor:',
+        schedule: 'Schedule: Automatic daily deduction (1%)',
+        expectedAmount: 'Expected collection amount:',
+        guaranteeAvailable: 'Financial guarantee available in wallet',
+        approveSchedule: 'Approve Schedule',
+        new: 'New',
+        minutesAgo: '2 minutes ago',
+      },
+      walletLoading: {
+        title: 'Wallet Loading & Guarantee Confirmation',
+        subtitle: 'Final step: Deposit the guarantee amount in the secure wallet to issue the permit',
+        walletTitle: 'Electronic Guarantee Wallet',
+        secure: 'Secure & Encrypted',
+        amountLabel: 'Amount Required to Deposit',
+        includesReserve: 'Includes 50% reserve',
+        selectPayment: 'Select Payment Method',
+        mada: 'Mada',
+        confirmPayment: 'Confirm Payment & Issue Permit',
+        securityNote: 'Payment process is fully secure and encrypted',
+      },
+      success: {
+        title: 'Travel Permit Issued Successfully',
+        description: 'You can now travel. Travel ban temporarily lifted for',
+        days: 'days',
+        officialPermit: 'Official Permit',
+        permitNumber: 'Permit Number',
+        destination: 'Destination',
+        returnDate: 'Mandatory Return Date',
+        guarantor: 'Guarantor',
+        paymentStatus: 'Payment Status',
+        scheduled: 'Automatically Scheduled',
+        printPermit: 'View & Print Permit',
+        backToHome: 'Back to Home',
+      },
+      permit: {
+        preview: 'Permit Preview',
+        print: 'Print',
+        close: 'Close Preview',
+        ksa: 'المملكة العربية السعودية',
+        ksaEn: 'Kingdom of Saudi Arabia',
+        moi: 'وزارة الداخلية',
+        moiEn: 'Ministry of Interior',
+        gdp: 'المديرية العامة للجوازات',
+        gdpEn: 'General Directorate of Passports',
+        title: 'تصريح سفر استثنائي (أبشر سفر)',
+        titleEn: 'Travel Permit for Debtors (Absher Travel)',
+        name: 'اسم المصرح له / Name',
+        idNumber: 'رقم الهوية / ID Number',
+        permitNo: 'رقم التصريح / Permit No',
+        issueDate: 'تاريخ الإصدار / Issue Date',
+        destinationLabel: 'وجهة السفر / Destination',
+        validity: 'صلاحية التصريح / Validity',
+        validityValue: 'Valid for 30 days from issue date',
+        guarantorLabel: 'اسم الضامن / Guarantor',
+        returnDateLabel: 'تاريخ العودة الإلزامي / Return Date',
+        instructions: 'Important Instructions / تعليمات هامة:',
+        instruction1: 'This permit is valid for one trip only to the specified destination.',
+        instruction2: 'You must return before the specified date to avoid financial penalties.',
+        instruction3: 'Daily payments are automatically deducted from the guarantor\'s wallet during travel.',
+        instruction4: 'Late return requires deduction from wallet reserve and guarantor must reload.',
+        qrCode: 'Digital Verification Code',
+        electronicDoc: 'Electronic document approved by Ministry of Interior - No stamp or signature required',
+      },
+      loading: 'Processing request and verifying systems...',
+    },
+    
+    // FAQ Page
+    faq: {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Comprehensive answers about Absher Safar service and how it works',
+      questions: [
+        {
+          question: 'Can I get a refund if I return before the specified duration?',
+          answer: 'No, amounts paid for remaining days cannot be refunded, as fees and scheduling are calculated based on the original travel request and approved duration.',
+        },
+        {
+          question: 'How many trips are allowed per year?',
+          answer: 'Beneficiaries may travel once every two months maximum, to ensure payment commitment and financial stability.',
+        },
+        {
+          question: 'What if I cannot find a guarantor?',
+          answer: 'If no guarantor is available, a special request can be submitted with doubled daily payment rate (2% instead of 1%), subject to explicit creditor approval for this exception.',
+        },
+        {
+          question: 'Can the travel duration be extended after departure?',
+          answer: 'Yes, travel can be extended through the app provided immediate payment for additional days and guarantor approval for the extended guarantee period.',
+        },
+        {
+          question: 'How is it handled if there is more than one creditor?',
+          answer: 'All registered creditors must approve for the permit to be issued. Upon approval, daily collected amounts (from deductions) are distributed equally among them.',
+        },
+        {
+          question: 'What happens if the debtor does not return on time?',
+          answer: 'If not returned, the guarantor bears all remaining debt amounts and legally replaces the debtor in financial claims, with immediate regulatory action taken.',
+        },
+        {
+          question: 'What is the maximum allowed travel duration?',
+          answer: 'There is no maximum number of days, as it depends on the debtor\'s and guarantor\'s ability to cover the daily financial equivalent and load the wallet with the required amount for the entire duration.',
+        },
+      ],
+      support: {
+        title: 'Have other questions?',
+        description: 'You can contact the technical support team through Absher platform or call the unified customer service number.',
+      },
+    },
+  },
+}
+
+
+
