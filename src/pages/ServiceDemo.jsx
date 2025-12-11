@@ -34,6 +34,7 @@ function ServiceDemo() {
 
   const ChevronIcon = direction === 'rtl' ? ChevronLeft : ChevronRight
   const DEBTOR_NAME = language === 'ar' ? 'أحمد محمد' : 'Ahmed Mohammed'
+  const DEBTOR_ID = '1987654321' // هوية صاحب الحساب (المدين)
 
   // Calculate costs
   const dailyAmount = TOTAL_DEBT * DAILY_RATE
@@ -706,8 +707,13 @@ function ServiceDemo() {
               </div>
               
               <div className="permit-info-item">
-                <span className="permit-label">{language === 'ar' ? 'اسم المسافر' : 'Traveler Name'}</span>
+                <span className="permit-label">{language === 'ar' ? 'اسم المستفيد' : 'Beneficiary Name'}</span>
                 <span className="permit-value">{DEBTOR_NAME}</span>
+              </div>
+              
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'هوية المستفيد' : 'Beneficiary ID'}</span>
+                <span className="permit-value" style={{direction: 'ltr', textAlign: direction === 'rtl' ? 'right' : 'left'}}>{DEBTOR_ID}</span>
               </div>
               
               <div className="permit-info-item">
@@ -721,12 +727,13 @@ function ServiceDemo() {
               </div>
               
               <div className="permit-info-item">
-                <span className="permit-label">{language === 'ar' ? 'الضامن' : 'Guarantor'}</span>
+                <span className="permit-label">{language === 'ar' ? 'اسم الضامن' : 'Guarantor Name'}</span>
                 <span className="permit-value">{guarantorName}</span>
               </div>
+              
               <div className="permit-info-item">
-                <span className="permit-label">{language === 'ar' ? 'رقم الهوية' : 'ID Number'}</span>
-                <span className="permit-value">{guarantorId}</span>
+                <span className="permit-label">{language === 'ar' ? 'هوية الضامن' : 'Guarantor ID'}</span>
+                <span className="permit-value" style={{direction: 'ltr', textAlign: direction === 'rtl' ? 'right' : 'left'}}>{guarantorId}</span>
               </div>
               
               <div className="permit-info-item">
