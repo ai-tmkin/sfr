@@ -330,14 +330,14 @@
 
 /* LTR: Line extends from the RIGHT of each step (towards next step) */
 [dir="ltr"] .step-line {
-  left: calc(50% + 16px);
+  left: 50%;
   right: -50%;
   width: auto;
 }
 
 /* RTL: Line extends from the LEFT of each step (towards next step in RTL reading order) */
 [dir="rtl"] .step-line {
-  right: calc(50% + 16px);
+  right: 50%;
   left: -50%;
   width: auto;
 }
