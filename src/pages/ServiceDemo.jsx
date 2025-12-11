@@ -25,12 +25,19 @@ function ServiceDemo() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showForm, setShowForm] = useState(false) // For Step 1 sub-view
   
-  // Guarantor Information
-  const [guarantorName, setGuarantorName] = useState('')
-  const [guarantorId, setGuarantorId] = useState('')
+  // Guarantor Information with default values
+  const [guarantorName, setGuarantorName] = useState(language === 'ar' ? 'خالد عبدالله العتيبي' : 'Khalid Abdullah Al-Otaibi')
+  const [guarantorId, setGuarantorId] = useState('1234567890')
   const [isVerifying, setIsVerifying] = useState(false)
-  const [isVerified, setIsVerified] = useState(false)
+  const [isVerified, setIsVerified] = useState(true) // Auto-verified with default data
   const [verificationError, setVerificationError] = useState('')
+
+  // Payment Card Information with default values
+  const [cardNumber, setCardNumber] = useState('4111111111111111')
+  const [cardHolder, setCardHolder] = useState(language === 'ar' ? 'أحمد محمد' : 'AHMED MOHAMMED')
+  const [expiryDate, setExpiryDate] = useState('12/26')
+  const [cvv, setCvv] = useState('123')
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('mada')
 
   const ChevronIcon = direction === 'rtl' ? ChevronLeft : ChevronRight
   const DEBTOR_NAME = language === 'ar' ? 'أحمد محمد' : 'Ahmed Mohammed'
@@ -567,35 +574,102 @@ function ServiceDemo() {
         <span>{language === 'ar' ? 'تمت موافقة الدائن على جدول السداد' : 'Creditor approved the payment schedule'}</span>
       </div>
 
-      <div className="absher-payment-card">
-        <div className="payment-header">
-          <Wallet size={32} />
-          <div>
-            <h3>{language === 'ar' ? 'شحن المحفظة' : 'Load Wallet'}</h3>
-            <p>{language === 'ar' ? 'يرجى شحن المحفظة بالمبلغ المطلوب لإصدار التصريح' : 'Please load the wallet with the required amount to issue the permit'}</p>
+      <div className="absher-status-card">
+        <div className="status-header">
+          <h3>{language === 'ar' ? 'حالة الطلب' : 'Request Status'}</h3>
+          <span className="status-badge pending">{language === 'ar' ? 'بانتظار الدفع' : 'Pending Payment'}</span>
+        </div>
+        <div className="status-details">
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'المبلغ المطلوب:' : 'Amount Required:'}</span>
+            <span className="value">{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
           </div>
         </div>
+      </div>
 
-        <div className="payment-amount">
-          <span className="label">{language === 'ar' ? 'المبلغ المطلوب شحنه' : 'Amount to Load'}</span>
-          <span className="amount">{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
-          <span className="note">{language === 'ar' ? 'يشمل احتياطي 50% إضافي' : 'Includes 50% additional reserve'}</span>
-        </div>
-
-        <div className="payment-methods">
-          <h4>{language === 'ar' ? 'اختر طريقة الدفع' : 'Select Payment Method'}</h4>
-          <div className="methods-grid">
-            <button className="method-btn active">
-              <span>{language === 'ar' ? 'مدى' : 'Mada'}</span>
-              <span className="card-number">**** 8829</span>
-            </button>
-            <button className="method-btn">
-              <span>VISA</span>
-              <span className="card-number">**** 4521</span>
-            </button>
-            <button className="method-btn">
-              <span>Apple Pay</span>
-            </button>
+      {/* Phone Mockup - Payment Form */}
+      <div className="absher-phone-mockup">
+        <div className="phone-frame">
+          <div className="phone-screen">
+            <div className="phone-status-bar">
+              <span>9:41</span>
+              <div className="status-icons">
+                <span>📶</span>
+                <span>🔋</span>
+              </div>
+            </div>
+            <div className="phone-app-header">
+              <span>{language === 'ar' ? 'أبشر' : 'Absher'}</span>
+              <Wallet size={18} />
+            </div>
+            <div className="phone-content">
+              <div className="notification-card payment-form-card">
+                <CreditCard size={24} />
+                <h4>{language === 'ar' ? 'شحن المحفظة' : 'Load Wallet'}</h4>
+                <p className="payment-amount-display">{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</p>
+                
+                <div className="card-input-form">
+                  <div className="form-input-group">
+                    <label>{language === 'ar' ? 'رقم البطاقة' : 'Card Number'}</label>
+                    <input 
+                      type="text" 
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, '').slice(0, 16))}
+                      placeholder="1234 5678 9012 3456"
+                      style={{direction: 'ltr', textAlign: 'left'}}
+                    />
+                  </div>
+                  
+                  <div className="form-input-group">
+                    <label>{language === 'ar' ? 'اسم حامل البطاقة' : 'Card Holder Name'}</label>
+                    <input 
+                      type="text" 
+                      value={cardHolder}
+                      onChange={(e) => setCardHolder(e.target.value)}
+                      placeholder={language === 'ar' ? 'الاسم كما يظهر على البطاقة' : 'Name as on card'}
+                    />
+                  </div>
+                  
+                  <div className="form-input-row">
+                    <div className="form-input-group">
+                      <label>{language === 'ar' ? 'تاريخ الانتهاء' : 'Expiry Date'}</label>
+                      <input 
+                        type="text" 
+                        value={expiryDate}
+                        onChange={(e) => {
+                          let value = e.target.value.replace(/\D/g, '')
+                          if (value.length >= 2) {
+                            value = value.slice(0, 2) + '/' + value.slice(2, 4)
+                          }
+                          setExpiryDate(value)
+                        }}
+                        placeholder="MM/YY"
+                        maxLength={5}
+                        style={{direction: 'ltr', textAlign: 'left'}}
+                      />
+                    </div>
+                    
+                    <div className="form-input-group">
+                      <label>CVV</label>
+                      <input 
+                        type="text" 
+                        value={cvv}
+                        onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                        placeholder="123"
+                        maxLength={3}
+                        style={{direction: 'ltr', textAlign: 'left'}}
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="notification-buttons">
+                  <button className="accept-btn" onClick={handleNextStep}>
+                    {language === 'ar' ? 'تأكيد الدفع' : 'Confirm Payment'}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -603,10 +677,6 @@ function ServiceDemo() {
       <div className="absher-nav-buttons">
         <button className="absher-secondary-btn" onClick={() => setCurrentStep(3)}>
           {language === 'ar' ? 'السابق' : 'Previous'}
-        </button>
-        <button className="absher-primary-btn" onClick={handleNextStep}>
-          {language === 'ar' ? 'تأكيد الدفع' : 'Confirm Payment'}
-          <ChevronIcon size={18} />
         </button>
       </div>
     </div>

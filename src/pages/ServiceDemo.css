@@ -895,6 +895,61 @@
   margin-bottom: 12px;
 }
 
+/* Payment Form Card Styles */
+.payment-form-card {
+  text-align: start !important;
+}
+
+.payment-amount-display {
+  font-size: 24px !important;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  margin: 12px 0 !important;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(84, 64, 153, 0.08) 0%, rgba(123, 93, 194, 0.08) 100%);
+  border-radius: 8px;
+}
+
+.card-input-form {
+  margin: 16px 0;
+}
+
+.form-input-group {
+  margin-bottom: 12px;
+}
+
+.form-input-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.form-input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.form-input-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(84, 64, 153, 0.1);
+}
+
+.form-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
 .notification-details {
   text-align: start;
   font-size: 11px;
