@@ -1030,45 +1030,48 @@
                                 <span style="font-size: 14px;">الخطوة 4 من 5</span>
                             </div>
                             <div class="mobile-content">
-                                <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 16px;">💳 شحن المحفظة</h2>
-                                
-                                <div class="wallet-card">
-                                    <div class="wallet-balance">الرصيد الحالي</div>
-                                    <div class="wallet-amount">5,000 ر.س</div>
+                                <div style="text-align: center; margin-bottom: 16px;">
+                                    <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
+                                    <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 4px;">شحن المحفظة</h2>
+                                    <p style="font-size: 12px; color: #666;">إدخال بيانات البطاقة للدفع</p>
                                 </div>
                                 
-                                <div class="info-card" style="background: #fff3cd; border-color: #ffc107;">
-                                    <p style="color: #856404;">
-                                        <strong>المبلغ المطلوب:</strong> 18,750 ر.س
-                                    </p>
-                                    <p style="color: #856404; margin-top: 8px;">
-                                        يجب شحن المحفظة بمبلغ <strong>13,750 ر.س</strong> إضافي
-                                    </p>
+                                <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 16px;">
+                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 4px;">المبلغ المطلوب</div>
+                                    <div style="font-size: 24px; font-weight: 700;">18,750 ر.س</div>
+                                    <div style="font-size: 10px; opacity: 0.8; margin-top: 4px;">يشمل احتياطي 50%</div>
                                 </div>
                                 
-                                <h3 style="font-size: 14px; color: #333; margin: 16px 0 12px;">اختر طريقة الدفع:</h3>
-                                
-                                <div class="payment-methods">
-                                    <div class="payment-method">
-                                        <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
-                                        <span>مدى</span>
+                                <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div class="form-group">
+                                        <label>رقم البطاقة</label>
+                                        <input type="text" value="4111 1111 1111 1111" readonly style="direction: ltr; text-align: left; background: #f8f9fa;">
                                     </div>
-                                    <div class="payment-method">
-                                        <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
-                                        <span>VISA</span>
+                                    
+                                    <div class="form-group">
+                                        <label>اسم حامل البطاقة</label>
+                                        <input type="text" value="أحمد محمد" readonly style="background: #f8f9fa;">
                                     </div>
-                                    <div class="payment-method">
-                                        <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
-                                        <span>Mastercard</span>
+                                    
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                        <div class="form-group">
+                                            <label>تاريخ الانتهاء</label>
+                                            <input type="text" value="12/26" readonly style="direction: ltr; text-align: left; background: #f8f9fa;">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>CVV</label>
+                                            <input type="text" value="123" readonly style="direction: ltr; text-align: left; background: #f8f9fa;">
+                                        </div>
                                     </div>
-                                    <div class="payment-method">
-                                        <div style="font-size: 32px; margin-bottom: 8px;">🍎</div>
-                                        <span>Apple Pay</span>
+                                    
+                                    <div style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 10px; margin: 12px 0; display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 14px;">🔒</span>
+                                        <span style="font-size: 11px; color: #155724;">دفع آمن ومشفّر</span>
                                     </div>
                                 </div>
                                 
-                                <button class="btn-primary" style="width: 100%;">
-                                    تأكيد الدفع ←
+                                <button class="btn-primary" style="width: 100%; margin-top: 16px;">
+                                    ✓ تأكيد الدفع
                                 </button>
                             </div>
                         </div>
