@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبشر سفر - عرض تقديمي تفاعلي</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #544099;
+            --primary-light: #7B5DC2;
+            --primary-dark: #3D2E73;
+            --accent: #00A651;
+            --bg-dark: #1a1432;
+            --bg-card: rgba(84, 64, 153, 0.15);
+            --text-light: #E8E4F0;
+            --text-muted: #A89CC8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #2d1f54 50%, var(--bg-dark) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+            padding: 60px 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        .presentation-header {
+            background: rgba(0,0,0,0.3);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo-section img {
+            height: 48px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, #00C853 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .date-badge {
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+        
+        .badge.accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .section-title .icon {
+            font-size: 36px;
+        }
+        
+        /* Mobile Device Frame */
+        .device-frame {
+            position: relative;
+            width: 320px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6), 
+                        0 0 0 1px rgba(255,255,255,0.1),
+                        inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 auto;
+        }
+        
+        .device-frame:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 35px 100px rgba(84, 64, 153, 0.5), 
+                        0 0 0 1px rgba(255,255,255,0.2),
+                        inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+        
+        .device-frame::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            z-index: 10;
+        }
+        
+        .device-screen {
+            background: #f5f5f5;
+            border-radius: 32px;
+            overflow: hidden;
+            height: 640px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Mobile Screen Components */
+        .mobile-header {
+            background: var(--primary);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .mobile-header-logos {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .absher-logo {
+            width: auto;
+            height: 36px;
+        }
+        
+        .vision-logo {
+            width: auto;
+            height: 32px;
+        }
+        
+        .mobile-status-bar {
+            background: rgba(0,0,0,0.1);
+            padding: 6px 16px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+        }
+        
+        .mobile-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            background: white;
+        }
+        
+        /* Absher Styles for Mobile Screens */
+        .absher-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 32px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .absher-hero h1 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .absher-hero p {
+            font-size: 13px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .info-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .info-card h3 {
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .info-card p, .info-card ul {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-card ul li {
+            padding: 4px 0;
+        }
+        
+        .info-card ul li::before {
+            content: "• ";
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+        
+        .calc-result {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .calc-row.total {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary);
+            border-top: 1px solid #ddd;
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+        
+        /* Phone Mockup for Notifications */
+        .phone-notification {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .notification-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .notification-title {
+            flex: 1;
+        }
+        
+        .notification-title h3 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .notification-title p {
+            font-size: 11px;
+            color: #999;
+        }
+        
+        .notification-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 12px;
+        }
+        
+        .detail-row .label {
+            color: #666;
+        }
+        
+        .detail-row .value {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #dc3545;
+            color: white;
+        }
+        
+        /* Najiz Theme */
+        .najiz-theme {
+            background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+        }
+        
+        .najiz-icon {
+            background: #d4af37;
+            color: #654321;
+        }
+        
+        /* Wallet Screen */
+        .wallet-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .wallet-balance {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        
+        .wallet-amount {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .payment-method {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .payment-method img {
+            height: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .payment-method span {
+            display: block;
+            font-size: 12px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        /* Permit Card */
+        .permit-card {
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .permit-status {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .permit-qr {
+            width: 120px;
+            height: 120px;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 16px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        
+        .permit-id {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 12px 0;
+        }
+        
+        /* Showcase Layout */
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .screen-item {
+            text-align: center;
+        }
+        
+        .screen-label {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .screen-description {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        /* FAQ Styles */
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .faq-number {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+        
+        /* Settings Styles */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .theme-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .theme-option.active {
+            border-color: var(--primary);
+            background: rgba(84, 64, 153, 0.05);
+        }
+        
+        .theme-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+        }
+        
+        .theme-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* Footer */
+        .presentation-footer {
+            background: rgba(0,0,0,0.3);
+            padding: 32px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .footer-logos {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .footer-logos img {
+            height: 40px;
+            opacity: 0.7;
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="presentation-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" style="filter: brightness(0) invert(1);">
+                    <span class="logo-text">أبشر سفر</span>
+                </div>
+                <div class="date-badge">عرض تقديمي تفاعلي • ديسمبر 2025</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>أبشر سفر</h1>
+            <p>حل مبتكر يمكّن المواطنين الممنوعين من السفر بسبب مديونيات مسجلة في نظام ناجز من الحصول على تصاريح سفر مؤقتة، مع ضمان حقوق الدائنين من خلال آلية سداد تلقائي</p>
+            <div class="hero-badges">
+                <span class="badge">🏛️ تكامل مع أبشر</span>
+                <span class="badge">⚖️ تكامل مع ناجز</span>
+                <span class="badge">💳 سداد يومي تلقائي</span>
+                <span class="badge accent">✈️ تصريح سفر مؤقت</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Page Screen -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">🏠</span> الصفحة الرئيسية</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                    <img src="https://www.absher.sa/portal/landing/img/vission-logo.png" alt="Vision 2030" class="vision-logo">
+                                </div>
+                                <button style="background: none; border: none; color: white; font-size: 14px;">English</button>
+                            </div>
+                            <div class="mobile-status-bar">
+                                <span>الرئيسية • أبشر سفر</span>
+                            </div>
+                            <div class="mobile-content">
+                                <div class="absher-hero">
+                                    <h1>✈️ أبشر سفر</h1>
+                                    <p>تصريح سفر مؤقت للمواطنين الممنوعين من السفر بسبب المديونيات</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h3>👥 الفئة المستهدفة</h3>
+                                    <ul>
+                                        <li>المواطنون الممنوعون من السفر</li>
+                                        <li>المديونيات المسجلة في ناجز</li>
+                                        <li>لديهم ضامن مالي</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h3>⏱️ مدة الإنجاز</h3>
+                                    <p>فوري بعد اكتمال الموافقات والسداد</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h3>💰 الرسوم</h3>
+                                    <p>1% من المديونية يومياً + ضمان 50%</p>
+                                </div>
+                                
+                                <button class="btn-primary" style="width: 100%; margin-top: 16px;">
+                                    ✈️ تنفيذ الخدمة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">الصفحة الرئيسية</div>
+                    <div class="screen-description">نظرة عامة على الخدمة والمميزات</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 1: Trip Data -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">📝</span> الخطوة 1: بيانات الرحلة</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                </div>
+                                <span style="font-size: 14px;">الخطوة 1 من 5</span>
+                            </div>
+                            <div class="mobile-content">
+                                <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 16px;">✈️ بيانات طلب السفر الجديد</h2>
+                                
+                                <div class="info-card" style="background: #fff3cd; border-color: #ffc107;">
+                                    <p style="color: #856404; font-weight: 600;">إجمالي المديونية: 250,000 ر.س</p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>الوجهة</label>
+                                    <input type="text" value="دبي، الإمارات" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>مدة السفر (أيام)</label>
+                                    <input type="number" value="5" readonly>
+                                </div>
+                                
+                                <div class="calc-result">
+                                    <div class="calc-row">
+                                        <span>القسط اليومي (1%):</span>
+                                        <span>2,500 ر.س</span>
+                                    </div>
+                                    <div class="calc-row">
+                                        <span>مدة السفر:</span>
+                                        <span>5 أيام</span>
+                                    </div>
+                                    <div class="calc-row">
+                                        <span>التكلفة الإجمالية:</span>
+                                        <span>12,500 ر.س</span>
+                                    </div>
+                                    <div class="calc-row total">
+                                        <span>المبلغ المطلوب (مع الضمان):</span>
+                                        <span>18,750 ر.س</span>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn-primary" style="width: 100%;">
+                                    إرسال للضامن ←
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">بيانات الرحلة</div>
+                    <div class="screen-description">إدخال تفاصيل الوجهة والمدة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 2: Guarantor Approval -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">🤝</span> الخطوة 2: موافقة الضامن</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                </div>
+                                <span style="font-size: 11px;">9:41 📶 🔋</span>
+                            </div>
+                            <div class="mobile-content">
+                                <div class="phone-notification">
+                                    <div class="notification-header">
+                                        <div class="notification-icon">🛡️</div>
+                                        <div class="notification-title">
+                                            <h3>أبشر • طلب كفالة</h3>
+                                            <p>منذ دقيقتين</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 style="font-size: 14px; color: #333; margin-bottom: 12px;">
+                                        طلب ضمان لتصريح سفر #88992
+                                    </h4>
+                                    
+                                    <div class="notification-details">
+                                        <div class="detail-row">
+                                            <span class="label">اسم المدين:</span>
+                                            <span class="value">أحمد محمد</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">الوجهة:</span>
+                                            <span class="value">دبي، الإمارات</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">مدة السفر:</span>
+                                            <span class="value">5 يوم</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">المبلغ المطلوب:</span>
+                                            <span class="value">18,750 ر.س</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">مبلغ الضمان:</span>
+                                            <span class="value">6,250 ر.س</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="background: #d4edda; padding: 12px; border-radius: 8px; margin: 12px 0;">
+                                        <p style="font-size: 11px; color: #155724;">
+                                            ✓ سيتم حجز مبلغ الضمان من محفظتك حتى عودة المدين
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="action-buttons">
+                                        <button class="btn-primary">✓ قبول</button>
+                                        <button class="btn-secondary">✗ رفض</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">موافقة الضامن</div>
+                    <div class="screen-description">إشعار الضامن عبر تطبيق أبشر</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 3: Creditor Approval -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">⚖️</span> الخطوة 3: موافقة الدائن</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header najiz-theme">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-size: 20px;">⚖️</span>
+                                    <span style="font-weight: 600;">ناجز</span>
+                                </div>
+                                <span style="font-size: 11px;">9:41 📶 🔋</span>
+                            </div>
+                            <div class="mobile-content">
+                                <div class="phone-notification">
+                                    <div class="notification-header">
+                                        <div class="notification-icon najiz-icon">⚖️</div>
+                                        <div class="notification-title">
+                                            <h3>ناجز • طلب جديد</h3>
+                                            <p>منذ 2 دقيقة</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 style="font-size: 14px; color: #333; margin-bottom: 12px;">
+                                        طلب موافقة على سفر مدين #88992
+                                    </h4>
+                                    
+                                    <div class="notification-details">
+                                        <div class="detail-row">
+                                            <span class="label">اسم المدين:</span>
+                                            <span class="value">أحمد محمد</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">الوجهة:</span>
+                                            <span class="value">دبي، الإمارات</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">مدة السفر:</span>
+                                            <span class="value">5 يوم</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">المبلغ اليومي:</span>
+                                            <span class="value">2,500 ر.س</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">إجمالي التحصيل:</span>
+                                            <span class="value">12,500 ر.س</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="background: #d4edda; padding: 12px; border-radius: 8px; margin: 12px 0;">
+                                        <p style="font-size: 11px; color: #155724; font-weight: 600;">
+                                            ✓ ضمان مالي مؤكد من الكفيل
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="action-buttons">
+                                        <button class="btn-primary">✓ موافقة</button>
+                                        <button class="btn-secondary">✗ رفض</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">موافقة الدائن</div>
+                    <div class="screen-description">إشعار الدائن عبر منصة ناجز</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 4: Wallet Loading -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">💳</span> الخطوة 4: شحن المحفظة</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                </div>
+                                <span style="font-size: 14px;">الخطوة 4 من 5</span>
+                            </div>
+                            <div class="mobile-content">
+                                <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 16px;">💳 شحن المحفظة</h2>
+                                
+                                <div class="wallet-card">
+                                    <div class="wallet-balance">الرصيد الحالي</div>
+                                    <div class="wallet-amount">5,000 ر.س</div>
+                                </div>
+                                
+                                <div class="info-card" style="background: #fff3cd; border-color: #ffc107;">
+                                    <p style="color: #856404;">
+                                        <strong>المبلغ المطلوب:</strong> 18,750 ر.س
+                                    </p>
+                                    <p style="color: #856404; margin-top: 8px;">
+                                        يجب شحن المحفظة بمبلغ <strong>13,750 ر.س</strong> إضافي
+                                    </p>
+                                </div>
+                                
+                                <h3 style="font-size: 14px; color: #333; margin: 16px 0 12px;">اختر طريقة الدفع:</h3>
+                                
+                                <div class="payment-methods">
+                                    <div class="payment-method">
+                                        <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
+                                        <span>مدى</span>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
+                                        <span>VISA</span>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div style="font-size: 32px; margin-bottom: 8px;">💳</div>
+                                        <span>Mastercard</span>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div style="font-size: 32px; margin-bottom: 8px;">🍎</div>
+                                        <span>Apple Pay</span>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn-primary" style="width: 100%;">
+                                    تأكيد الدفع ←
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">شحن المحفظة</div>
+                    <div class="screen-description">اختيار طريقة الدفع وشحن المحفظة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 5: Permit Issuance -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">🎫</span> الخطوة 5: إصدار التصريح</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                </div>
+                                <span style="font-size: 14px;">✓ مكتمل</span>
+                            </div>
+                            <div class="mobile-content">
+                                <div style="text-align: center; padding: 20px 0;">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">✅</div>
+                                    <h2 style="font-size: 20px; color: var(--accent); margin-bottom: 8px;">تم إصدار التصريح بنجاح!</h2>
+                                    <p style="font-size: 13px; color: #666;">رحلة سعيدة وآمنة</p>
+                                </div>
+                                
+                                <div class="permit-card">
+                                    <div class="permit-status">✈️ تصريح سفر مؤقت</div>
+                                    
+                                    <div class="permit-qr">
+                                        📱
+                                    </div>
+                                    
+                                    <div class="permit-id">TR-2024-88992</div>
+                                    
+                                    <div style="text-align: right; margin: 16px 0;">
+                                        <div class="detail-row">
+                                            <span class="label">المستفيد:</span>
+                                            <span class="value">أحمد محمد</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">الوجهة:</span>
+                                            <span class="value">دبي، الإمارات</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">مدة السفر:</span>
+                                            <span class="value">5 أيام</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">تاريخ الإصدار:</span>
+                                            <span class="value">10/12/2025</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">تاريخ الانتهاء:</span>
+                                            <span class="value">15/12/2025</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn-primary" style="width: 100%; margin-top: 16px;">
+                                    🖨️ طباعة التصريح
+                                </button>
+                                
+                                <button class="btn-secondary" style="width: 100%; margin-top: 8px; background: #6c757d;">
+                                    📤 مشاركة التصريح
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">إصدار التصريح</div>
+                    <div class="screen-description">التصريح مع رمز QR للتحقق</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Screen -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">❓</span> صفحة الأسئلة الشائعة</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                </div>
+                                <button style="background: none; border: none; color: white; font-size: 20px;">☰</button>
+                            </div>
+                            <div class="mobile-content">
+                                <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                                    ❓ الأسئلة الشائعة
+                                </h2>
+                                
+                                <p style="font-size: 13px; color: #666; margin-bottom: 16px;">
+                                    إجابات على الأسئلة الأكثر شيوعاً حول خدمة أبشر سفر
+                                </p>
+                                
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <span class="faq-number">1</span>
+                                        <span>ما هي خدمة أبشر سفر؟</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <span class="faq-number">2</span>
+                                        <span>من يمكنه الاستفادة من الخدمة؟</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <span class="faq-number">3</span>
+                                        <span>كيف يتم احتساب التكلفة؟</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <span class="faq-number">4</span>
+                                        <span>ما هو دور الضامن؟</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <span class="faq-number">5</span>
+                                        <span>ماذا يحدث إذا لم أعد في الموعد؟</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <span class="faq-number">6</span>
+                                        <span>هل يمكن تمديد مدة التصريح؟</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">الأسئلة الشائعة</div>
+                    <div class="screen-description">قائمة تفاعلية بالأسئلة والأجوبة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Screen -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">⚙️</span> صفحة الإعدادات</h2>
+            <div class="screens-grid">
+                <div class="screen-item">
+                    <div class="device-frame">
+                        <div class="device-screen">
+                            <div class="mobile-header">
+                                <div class="mobile-header-logos">
+                                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" class="absher-logo" style="filter: brightness(0) invert(1);">
+                                </div>
+                                <button style="background: none; border: none; color: white; font-size: 20px;">☰</button>
+                            </div>
+                            <div class="mobile-content">
+                                <h2 style="font-size: 18px; color: var(--primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                                    ⚙️ الإعدادات
+                                </h2>
+                                
+                                <h3 style="font-size: 14px; color: #333; margin-bottom: 12px;">✨ اختر الثيم المفضل</h3>
+                                
+                                <div class="theme-grid">
+                                    <div class="theme-option active">
+                                        <div class="theme-color" style="background: #544099;"></div>
+                                        <div class="theme-name">أرجواني (افتراضي)</div>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-color" style="background: #00412B;"></div>
+                                        <div class="theme-name">أخضر (أبشر الأصلي)</div>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-color" style="background: #1E40AF;"></div>
+                                        <div class="theme-name">أزرق ملكي</div>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-color" style="background: #0D9488;"></div>
+                                        <div class="theme-name">أزرق مخضر</div>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-color" style="background: #991B1B;"></div>
+                                        <div class="theme-name">كستنائي</div>
+                                    </div>
+                                    <div class="theme-option">
+                                        <div class="theme-color" style="background: #EA580C;"></div>
+                                        <div class="theme-name">برتقالي</div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 24px;">
+                                    <h3 style="font-size: 14px; color: #333; margin-bottom: 12px;">🎨 معاينة الألوان المخصصة</h3>
+                                    <div style="background: var(--primary); color: white; padding: 16px; border-radius: 8px; text-align: center;">
+                                        <p style="font-size: 14px; font-weight: 600;">اللون الأساسي</p>
+                                        <p style="font-size: 12px; margin-top: 4px; opacity: 0.9;">#544099</p>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn-primary" style="width: 100%; margin-top: 24px;">
+                                    💾 حفظ الإعدادات
+                                </button>
+                                
+                                <button class="btn-secondary" style="width: 100%; margin-top: 8px; background: #6c757d;">
+                                    🔄 استعادة الإعدادات الافتراضية
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-label">الإعدادات</div>
+                    <div class="screen-description">تخصيص الألوان والثيمات</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="presentation-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logos">
+                    <img src="https://www.absher.sa/portal/landing/img/moi-logo.svg?MOD=AJPERES" alt="وزارة الداخلية">
+                    <img src="https://www.absher.sa/portal/landing/img/vission-logo.png" alt="رؤية 2030">
+                </div>
+                <div class="footer-text">
+                    أبشر سفر - عرض تقديمي تفاعلي • جميع الشاشات مصممة بالكود • ديسمبر 2025
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
