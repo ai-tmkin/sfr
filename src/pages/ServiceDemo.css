@@ -320,40 +320,37 @@
 }
 
 /* ========================================
-   STEPPER CONNECTING LINES - BEST PRACTICE
-   Using CSS Logical Properties for automatic RTL/LTR support
+   STEPPER CONNECTING LINES
+   Line goes FROM current step TOWARDS next step
    ======================================== */
-
-/*
- * How it works:
- * - Each step has a line that connects TO it FROM the previous step
- * - Using CSS logical properties (inset-inline-start/end) for automatic direction support
- * - inset-inline-start = left in LTR, right in RTL
- * - inset-inline-end = right in LTR, left in RTL
- * - Line is shown on steps 2-5 when the PREVIOUS step is completed
- */
 
 .step-line {
   position: absolute;
   top: 15px;
   height: 2px;
-  background: #E0E0E0; /* Default gray for pending */
+  background: #E0E0E0;
   z-index: 1;
-  
-  /* Position: from outside the step (previous step) to center of current step */
-  inset-inline-start: -50%;
-  inset-inline-end: 50%;
-  width: auto;
 }
 
-/* First step: No line before it (no previous step) */
-.stepper-step:first-child .step-line {
+/* LTR: Line extends to the RIGHT (towards next step) */
+[dir="ltr"] .step-line {
+  left: calc(50% + 16px);
+  right: calc(-50% + 16px);
+}
+
+/* RTL: Line extends to the LEFT (towards next step) */
+[dir="rtl"] .step-line {
+  right: calc(50% + 16px);
+  left: calc(-50% + 16px);
+}
+
+/* Last step: No line after it */
+.stepper-step:last-child .step-line {
   display: none;
 }
 
-/* Color the line when PREVIOUS step is completed */
-.stepper-step.completed .step-line,
-.stepper-step.active .step-line {
+/* Completed step: Line is colored */
+.stepper-step.completed .step-line {
   background: var(--color-primary);
 }
 
