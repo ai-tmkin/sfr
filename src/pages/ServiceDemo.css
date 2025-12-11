@@ -326,6 +326,7 @@
   height: 2px;
   background: #E0E0E0;
   z-index: 1;
+  display: none; /* Hidden by default */
 }
 
 /* LTR: Line extends from the RIGHT of each step (towards next step) */
@@ -342,13 +343,9 @@
   width: auto;
 }
 
-/* Hide line on first step - no line should appear before the first step */
-.stepper-step:first-child .step-line {
-  display: none;
-}
-
-/* Completed step has primary color line leading to it */
+/* Show line only on completed steps */
 .stepper-step.completed .step-line {
+  display: block;
   background: var(--color-primary);
 }
 
