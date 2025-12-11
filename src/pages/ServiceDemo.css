@@ -319,39 +319,9 @@
   font-weight: 500;
 }
 
-/* ========================================
-   STEPPER CONNECTING LINES
-   Line goes FROM current step TOWARDS next step
-   ======================================== */
-
+/* Stepper connecting lines - disabled for now */
 .step-line {
-  position: absolute;
-  top: 15px;
-  height: 2px;
-  background: #E0E0E0;
-  z-index: 1;
-}
-
-/* LTR: Line extends to the RIGHT (towards next step) */
-[dir="ltr"] .step-line {
-  left: calc(50% + 16px);
-  right: calc(-50% + 16px);
-}
-
-/* RTL: Line extends to the LEFT (towards next step) */
-[dir="rtl"] .step-line {
-  right: calc(50% + 16px);
-  left: calc(-50% + 16px);
-}
-
-/* Last step: No line after it */
-.stepper-step:last-child .step-line {
   display: none;
-}
-
-/* Completed step: Line is colored */
-.stepper-step.completed .step-line {
-  background: var(--color-primary);
 }
 
 /* ========================================
