@@ -324,29 +324,28 @@
   position: absolute;
   top: 15px;
   height: 2px;
-  background: #E0E0E0;
+  background: var(--color-primary);
   z-index: 1;
   display: none; /* Hidden by default */
 }
 
-/* LTR: Line extends from the RIGHT of each step (towards next step) */
+/* LTR: Line comes FROM the left (from previous step) TO this step */
 [dir="ltr"] .step-line {
-  left: 50%;
-  right: -50%;
-  width: auto;
-}
-
-/* RTL: Line extends from the LEFT of each step (towards next step in RTL reading order) */
-[dir="rtl"] .step-line {
   right: 50%;
   left: -50%;
   width: auto;
 }
 
-/* Show line only on completed steps */
-.stepper-step.completed .step-line {
+/* RTL: Line comes FROM the right (from previous step) TO this step */
+[dir="rtl"] .step-line {
+  left: 50%;
+  right: -50%;
+  width: auto;
+}
+
+/* Show line on steps that come after a completed step */
+.stepper-step.completed + .stepper-step .step-line {
   display: block;
-  background: var(--color-primary);
 }
 
 /* ========================================
