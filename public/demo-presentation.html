@@ -29,6 +29,22 @@
             color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            animation: fadeInUp 0.6s ease-out;
         }
         
         .container {
@@ -59,16 +75,18 @@
             gap: 16px;
         }
         
-        .logo-section svg {
-            width: 32px;
+        .logo-section img {
             height: 48px;
-            color: var(--accent);
+            width: auto;
         }
         
         .logo-text {
             font-size: 24px;
             font-weight: 700;
-            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, #00C853 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .date-badge {
@@ -142,6 +160,97 @@
         
         .section-title .icon {
             font-size: 36px;
+        }
+        
+        /* Mobile Mockup Display */
+        .mobile-mockup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .mobile-mockup {
+            position: relative;
+            width: 280px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 36px;
+            padding: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .mobile-mockup:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(84, 64, 153, 0.4), 0 0 0 1px rgba(255,255,255,0.2);
+        }
+        
+        .mobile-mockup::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        
+        .mobile-screen {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            width: 100%;
+            height: 568px;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .mobile-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+        
+        /* Ensure mobile screenshots maintain proper aspect ratio */
+        .step-mockup {
+            width: 200px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+            aspect-ratio: 9/16;
+            height: 355px;
+        }
+        
+        .step-mockup img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+        
+        .mockup-label {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .mockup-description {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 280px;
         }
         
         /* Cards Grid */
@@ -247,7 +356,7 @@
             font-size: 14px;
         }
         
-        .step-screenshot {
+        .step-mockup {
             width: 200px;
             flex-shrink: 0;
             border-radius: 12px;
@@ -255,111 +364,65 @@
             border: 2px solid rgba(255,255,255,0.1);
         }
         
-        .step-screenshot img {
+        .step-mockup img {
             width: 100%;
             height: auto;
             display: block;
         }
         
-        /* Risk Algorithm */
-        .algorithm-box {
+        /* Page Showcase */
+        .page-showcase {
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 32px;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
             border: 1px solid rgba(255,255,255,0.1);
         }
         
-        .formula {
-            background: rgba(0,0,0,0.3);
-            padding: 24px;
-            border-radius: 12px;
-            font-family: monospace;
-            font-size: 16px;
-            margin-bottom: 24px;
+        .page-showcase-header {
             text-align: center;
-            color: var(--accent);
+            margin-bottom: 32px;
         }
         
-        .factors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        
-        .factor {
-            background: rgba(0,0,0,0.2);
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .factor-name {
-            font-size: 14px;
-            color: var(--text-muted);
+        .page-showcase-header h3 {
+            font-size: 28px;
             margin-bottom: 8px;
+            color: white;
         }
         
-        .factor-weight {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-light);
-        }
-        
-        .risk-levels {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .risk-level {
-            flex: 1;
-            min-width: 150px;
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .risk-level.low {
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-        }
-        
-        .risk-level.medium {
-            background: rgba(245, 158, 11, 0.2);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-        }
-        
-        .risk-level.high {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.4);
-        }
-        
-        /* Data Sources Table */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-card);
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        
-        .data-table th,
-        .data-table td {
-            padding: 16px;
-            text-align: right;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .data-table th {
-            background: rgba(0,0,0,0.3);
-            font-weight: 600;
-            color: var(--primary-light);
-        }
-        
-        .data-table td {
+        .page-showcase-header p {
             color: var(--text-muted);
+            font-size: 16px;
+        }
+        
+        .page-mockups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+        
+        .page-mockup-item {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .page-mockup-item:hover {
+            transform: translateY(-4px);
+        }
+        
+        .page-mockup-item .mockup-label {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .page-mockup-item .mockup-description {
+            margin-top: 8px;
             font-size: 14px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* Screenshots Gallery */
@@ -444,7 +507,7 @@
                 flex-direction: column;
             }
             
-            .step-screenshot {
+            .step-mockup {
                 width: 100%;
                 max-width: 300px;
                 margin: 0 auto;
@@ -453,6 +516,14 @@
             .header-content {
                 flex-direction: column;
                 gap: 12px;
+            }
+            
+            .mobile-mockup-container {
+                gap: 24px;
+            }
+            
+            .page-mockups-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -463,9 +534,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 55" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M32.7429 4.21435H36.9704V0.0148506C34.8147 -0.209123 32.4629 2.1426 32.7429 4.21435ZM36.9998 6.03393V6.56586V46.3491C36.9998 47.385 36.6358 47.9449 35.6279 48.0569C34.964 48.135 34.2865 48.1178 33.5954 48.1002C33.2956 48.0926 32.9932 48.0849 32.6883 48.0849V47.581V7.82571C32.6883 6.73384 33.0802 6.17391 34.1161 6.06192C34.7614 5.98371 35.434 6.00109 36.1148 6.01869C36.4088 6.02629 36.7043 6.03393 36.9998 6.03393ZM4.38271 16.8685V17.4844V53.0962C4.38271 54.356 3.85077 54.916 2.59092 54.972C2.24105 54.9859 1.89117 54.986 1.5413 54.986H1.54101C1.19107 54.986 0.841121 54.986 0.491175 55C0.211208 55 0.0712224 54.888 0.099219 54.608V54.188V19.0522C0.099219 17.5404 0.51917 16.9525 2.28296 16.8965C2.76279 16.8548 3.27371 16.8597 3.81571 16.8649H3.81577C4.00111 16.8667 4.19009 16.8685 4.38271 16.8685Z" />
-                    </svg>
+                    <img src="https://www.absher.sa/portal/individuals/assets/images/absher_logo.svg" alt="أبشر" style="filter: brightness(0) invert(1);">
                     <span class="logo-text">أبشر سفر</span>
                 </div>
                 <div class="date-badge">تاريخ الإعداد: 10/12/2025</div>
@@ -483,6 +552,193 @@
                 <span class="badge">⚖️ تكامل مع ناجز</span>
                 <span class="badge">💳 سداد يومي تلقائي</span>
                 <span class="badge accent">✈️ تصريح سفر مؤقت</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Page Showcase -->
+    <section class="section">
+        <div class="container">
+            <div class="page-showcase">
+                <div class="page-showcase-header">
+                    <h3>📱 الصفحة الرئيسية</h3>
+                    <p>واجهة المستخدم الرئيسية للخدمة</p>
+                </div>
+                <div class="mobile-mockup-container">
+                    <div>
+                        <div class="mobile-mockup">
+                            <div class="mobile-screen">
+                                <img src="/screenshots/absher-landing.png" alt="الصفحة الرئيسية" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22375%22 height=%22812%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-size=%2224%22 fill=%22%23333%22%3Eالصفحة الرئيسية%3C/text%3E%3C/svg%3E'">
+                            </div>
+                        </div>
+                        <div class="mockup-label">الصفحة الرئيسية</div>
+                        <div class="mockup-description">عرض نظرة عامة على الخدمة والمميزات</div>
+                    </div>
+                    <div>
+                        <div class="mobile-mockup">
+                            <div class="mobile-screen">
+                                <img src="/screenshots/new-mobile-header.png" alt="القائمة الجانبية" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22375%22 height=%22812%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-size=%2224%22 fill=%22%23333%22%3Eالقائمة الجانبية%3C/text%3E%3C/svg%3E'">
+                            </div>
+                        </div>
+                        <div class="mockup-label">القائمة الجانبية</div>
+                        <div class="mockup-description">الوصول السريع لجميع صفحات التطبيق</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Demo - All Steps -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">🔄</span> مسار العملية - جميع الخطوات</h2>
+            
+            <!-- Step 1 -->
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>بيانات الرحلة</h3>
+                    <p>يقوم المدين بتسجيل الدخول عبر أبشر والتحقق من حالة حظر السفر، ثم يعرض النظام تفاصيل المديونية المسجلة في ناجز. يدخل المستخدم بيانات الرحلة (الوجهة، المدة) ويحسب النظام تلقائياً القسط اليومي (1% من المديونية) والمبلغ المطلوب شحنه.</p>
+                </div>
+                <div class="step-mockup">
+                    <img src="/screenshots/step1-mobile-updated.png" alt="بيانات الرحلة" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>موافقة الضامن</h3>
+                    <p>يتم إرسال إشعار للضامن عبر تطبيق أبشر يتضمن تفاصيل الطلب (الوجهة، المدة، المبلغ المطلوب). يقوم الضامن بمراجعة الطلب والموافقة أو الرفض. في حالة الموافقة، يتم حجز مبلغ الضمان من محفظة الضامن.</p>
+                </div>
+                <div class="step-mockup">
+                    <img src="/screenshots/mobile-step2.png" alt="موافقة الضامن" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>موافقة الدائن</h3>
+                    <p>يتم إرسال طلب للدائن عبر منصة ناجز مع تفاصيل جدول السداد المقترح (خصم يومي تلقائي). يراجع الدائن الطلب ويوافق على جدول السداد. النظام يعرض تفاصيل: نوع الجدولة، المبلغ اليومي، المبلغ المتوقع تحصيله.</p>
+                </div>
+                <div class="step-mockup">
+                    <img src="/screenshots/step3-creditor.png" alt="موافقة الدائن" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>شحن المحفظة</h3>
+                    <p>بعد موافقة الدائن، يطلب النظام من المدين شحن المحفظة بالمبلغ المطلوب (الضمان + هامش أمان 50%). يختار المستخدم طريقة الدفع (مدى، VISA، Apple Pay) ويتم التحقق من الرصيد قبل إصدار التصريح.</p>
+                </div>
+                <div class="step-mockup">
+                    <img src="/screenshots/step4-wallet.png" alt="شحن المحفظة" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="process-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>إصدار التصريح</h3>
+                    <p>يتم إصدار تصريح السفر المؤقت مع رمز QR للتحقق. يُرفع حظر السفر مؤقتاً لمدة الرحلة. يبدأ السداد اليومي التلقائي من المحفظة. يتم إرسال تذكير قبل 48 ساعة من موعد العودة الإلزامي.</p>
+                </div>
+                <div class="step-mockup">
+                    <img src="/screenshots/permit-final.png" alt="تصريح السفر" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Page Showcase -->
+    <section class="section">
+        <div class="container">
+            <div class="page-showcase">
+                <div class="page-showcase-header">
+                    <h3>❓ صفحة الأسئلة الشائعة</h3>
+                    <p>إجابات على الأسئلة الأكثر شيوعاً حول الخدمة</p>
+                </div>
+                <div class="mobile-mockup-container">
+                    <div>
+                        <div class="mobile-mockup">
+                            <div class="mobile-screen" style="background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); display: flex; align-items: center; justify-content: center; padding: 20px;">
+                                <div style="text-align: center; color: #333;">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">❓</div>
+                                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">الأسئلة الشائعة</div>
+                                    <div style="font-size: 14px; color: #666;">قائمة تفاعلية بالأسئلة والأجوبة</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mockup-label">الأسئلة الشائعة</div>
+                        <div class="mockup-description">قائمة تفاعلية بالأسئلة والأجوبة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Page Showcase -->
+    <section class="section">
+        <div class="container">
+            <div class="page-showcase">
+                <div class="page-showcase-header">
+                    <h3>⚙️ صفحة الإعدادات</h3>
+                    <p>تخصيص الألوان والواجهة حسب تفضيلاتك</p>
+                </div>
+                <div class="mobile-mockup-container">
+                    <div>
+                        <div class="mobile-mockup">
+                            <div class="mobile-screen">
+                                <img src="screenshots/absher-settings-page.png" alt="صفحة الإعدادات">
+                            </div>
+                        </div>
+                        <div class="mockup-label">الإعدادات</div>
+                        <div class="mockup-description">تخصيص الألوان والثيمات</div>
+                    </div>
+                    <div>
+                        <div class="mobile-mockup">
+                            <div class="mobile-screen">
+                                <img src="screenshots/absher-settings-preview.png" alt="معاينة الإعدادات">
+                            </div>
+                        </div>
+                        <div class="mockup-label">معاينة الألوان</div>
+                        <div class="mockup-description">معاينة مباشرة للتغييرات</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">✨</span> المميزات الرئيسية</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">💳</div>
+                    <h3>سداد يومي تلقائي</h3>
+                    <p>خصم تلقائي 1% من المديونية يومياً من المحفظة مع تحويل فوري للدائن</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>ضمان حقوق الدائن</h3>
+                    <p>كفالة مالية من الضامن + هامش أمان 50% لضمان حقوق الدائنين</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>تنفيذ فوري</h3>
+                    <p>بعد اكتمال الموافقات، يتم إصدار التصريح فوراً مع رفع حظر السفر مؤقتاً</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3>تكامل شامل</h3>
+                    <p>ربط مباشر مع نظام ناجز ووزارة العدل ومنصة أبشر</p>
+                </div>
             </div>
         </div>
     </section>
@@ -540,147 +796,36 @@
         </div>
     </section>
 
-    <!-- Process Flow -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title"><span class="icon">🔄</span> مسار العملية</h2>
-            <div class="process-flow">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>بيانات الرحلة</h3>
-                        <p>يقوم المدين بتسجيل الدخول عبر أبشر والتحقق من حالة حظر السفر، ثم يعرض النظام تفاصيل المديونية المسجلة في ناجز. يدخل المستخدم بيانات الرحلة (الوجهة، المدة) ويحسب النظام تلقائياً القسط اليومي (1% من المديونية) والمبلغ المطلوب شحنه.</p>
-                    </div>
-                    <div class="step-screenshot">
-                        <img src="screenshots/mobile-step1.png" alt="بيانات الرحلة">
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>موافقة الضامن</h3>
-                        <p>يتم إرسال إشعار للضامن عبر تطبيق أبشر يتضمن تفاصيل الطلب (الوجهة، المدة، المبلغ المطلوب). يقوم الضامن بمراجعة الطلب والموافقة أو الرفض. في حالة الموافقة، يتم حجز مبلغ الضمان من محفظة الضامن.</p>
-                    </div>
-                    <div class="step-screenshot">
-                        <img src="screenshots/mobile-step2.png" alt="موافقة الضامن">
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>موافقة الدائن</h3>
-                        <p>يتم إرسال طلب للدائن مع تفاصيل جدول السداد المقترح (خصم يومي تلقائي). يراجع الدائن الطلب ويوافق على جدول السداد. النظام يعرض تفاصيل: نوع الجدولة، المبلغ اليومي، المبلغ المتوقع تحصيله.</p>
-                    </div>
-                    <div class="step-screenshot">
-                        <img src="screenshots/step3-creditor.png" alt="موافقة الدائن">
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>شحن المحفظة</h3>
-                        <p>بعد موافقة الدائن، يطلب النظام من المدين شحن المحفظة بالمبلغ المطلوب (الضمان + هامش أمان 50%). يختار المستخدم طريقة الدفع (مدى، VISA، Apple Pay) ويتم التحقق من الرصيد قبل إصدار التصريح.</p>
-                    </div>
-                    <div class="step-screenshot">
-                        <img src="screenshots/step4-wallet.png" alt="شحن المحفظة">
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>إصدار التصريح</h3>
-                        <p>يتم إصدار تصريح السفر المؤقت مع رمز QR للتحقق. يُرفع حظر السفر مؤقتاً لمدة الرحلة. يبدأ السداد اليومي التلقائي من المحفظة. يتم إرسال تذكير قبل 48 ساعة من موعد العودة الإلزامي.</p>
-                    </div>
-                    <div class="step-screenshot">
-                        <img src="screenshots/permit-final.png" alt="تصريح السفر">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Risk Algorithm -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title"><span class="icon">🧮</span> خوارزمية تقييم المخاطر</h2>
-            <div class="algorithm-box">
-                <div class="formula">نقاط المخاطر = Σ (عامل × وزن)</div>
-                <div class="factors-grid">
-                    <div class="factor">
-                        <div class="factor-name">نسبة المديونية إلى الدخل</div>
-                        <div class="factor-weight">25%</div>
-                    </div>
-                    <div class="factor">
-                        <div class="factor-name">سجل السداد السابق</div>
-                        <div class="factor-weight">20%</div>
-                    </div>
-                    <div class="factor">
-                        <div class="factor-name">عدد مرات السفر السابقة</div>
-                        <div class="factor-weight">15%</div>
-                    </div>
-                    <div class="factor">
-                        <div class="factor-name">نسبة الالتزام بمواعيد العودة</div>
-                        <div class="factor-weight">25%</div>
-                    </div>
-                    <div class="factor">
-                        <div class="factor-name">قوة الضامن المالية</div>
-                        <div class="factor-weight">15%</div>
-                    </div>
-                </div>
-                <div class="risk-levels">
-                    <div class="risk-level low">
-                        <h4>منخفض</h4>
-                        <p>0-40 نقطة</p>
-                        <p>معامل ضمان: 1.2x</p>
-                    </div>
-                    <div class="risk-level medium">
-                        <h4>متوسط</h4>
-                        <p>41-70 نقطة</p>
-                        <p>معامل ضمان: 1.5x</p>
-                    </div>
-                    <div class="risk-level high">
-                        <h4>مرتفع</h4>
-                        <p>71-100 نقطة</p>
-                        <p>معامل ضمان: 2.0x أو رفض</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Technologies -->
     <section class="section">
         <div class="container">
             <h2 class="section-title"><span class="icon">🔧</span> التقنيات المستخدمة</h2>
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-icon">🔗</div>
-                    <h3>تكامل API مع أبشر</h3>
+                    <div class="card-icon">⚛️</div>
+                    <h3>React + Vite</h3>
                     <ul>
-                        <li>التسجيل كمزود خدمة معتمد</li>
+                        <li>واجهة مستخدم حديثة وسريعة</li>
+                        <li>مكونات قابلة لإعادة الاستخدام</li>
+                        <li>أداء عالي مع Hot Module Replacement</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>تصميم متجاوب</h3>
+                    <ul>
+                        <li>دعم كامل للشاشات الصغيرة</li>
+                        <li>واجهة RTL/LTR</li>
+                        <li>ثيمات قابلة للتخصيص</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3>تكامل API</h3>
+                    <ul>
                         <li>OAuth 2.0 للمصادقة</li>
                         <li>شهادات SSL معتمدة</li>
                         <li>استضافة داخل المملكة</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-icon">⚡</div>
-                    <h3>محرك السداد اليومي</h3>
-                    <ul>
-                        <li>خصم تلقائي الساعة 00:00</li>
-                        <li>تحويل فوري للدائن</li>
-                        <li>إشعار عند نقص الرصيد</li>
-                        <li>مهلة 24 ساعة قبل الإلغاء</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-icon">📊</div>
-                    <h3>لوحات التحكم</h3>
-                    <ul>
-                        <li>لوحة المدين (طلبات، محفظة)</li>
-                        <li>لوحة الضامن (طلبات الضمان)</li>
-                        <li>لوحة الدائن (جدول السداد)</li>
-                        <li>تقارير ومتابعة</li>
                     </ul>
                 </div>
                 <div class="card">
@@ -689,7 +834,6 @@
                     <ul>
                         <li>SMS للطلبات الجديدة</li>
                         <li>إشعارات التطبيق</li>
-                        <li>تقارير يومية بالبريد</li>
                         <li>تذكير قبل انتهاء التصريح</li>
                     </ul>
                 </div>
@@ -697,34 +841,106 @@
         </div>
     </section>
 
-    <!-- Screenshots -->
+    <!-- All Pages Overview -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><span class="icon">📱</span> نظرة شاملة على جميع الصفحات</h2>
+            <div class="page-mockups-grid">
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/absher-landing.png" alt="الصفحة الرئيسية">
+                        </div>
+                    </div>
+                    <div class="mockup-label">الصفحة الرئيسية</div>
+                    <div class="mockup-description">نظرة عامة على الخدمة والمميزات</div>
+                </div>
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/step1-mobile-updated.png" alt="بيانات الرحلة">
+                        </div>
+                    </div>
+                    <div class="mockup-label">بيانات الرحلة</div>
+                    <div class="mockup-description">إدخال تفاصيل الرحلة</div>
+                </div>
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/mobile-step2.png" alt="موافقة الضامن">
+                        </div>
+                    </div>
+                    <div class="mockup-label">موافقة الضامن</div>
+                    <div class="mockup-description">إشعار الضامن عبر أبشر</div>
+                </div>
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/step3-creditor.png" alt="موافقة الدائن">
+                        </div>
+                    </div>
+                    <div class="mockup-label">موافقة الدائن</div>
+                    <div class="mockup-description">إشعار الدائن عبر ناجز</div>
+                </div>
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/step4-wallet.png" alt="شحن المحفظة">
+                        </div>
+                    </div>
+                    <div class="mockup-label">شحن المحفظة</div>
+                    <div class="mockup-description">اختيار طريقة الدفع</div>
+                </div>
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/permit-final.png" alt="إصدار التصريح">
+                        </div>
+                    </div>
+                    <div class="mockup-label">إصدار التصريح</div>
+                    <div class="mockup-description">التصريح مع رمز QR</div>
+                </div>
+                <div class="page-mockup-item">
+                    <div class="mobile-mockup">
+                        <div class="mobile-screen">
+                            <img src="/screenshots/absher-settings-page.png" alt="الإعدادات">
+                        </div>
+                    </div>
+                    <div class="mockup-label">الإعدادات</div>
+                    <div class="mockup-description">تخصيص الألوان والثيمات</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
     <section class="section">
         <div class="container">
             <h2 class="section-title"><span class="icon">📱</span> لقطات من التطبيق</h2>
             <div class="screenshots-gallery">
                 <div class="screenshot-item">
-                    <img src="screenshots/new-mobile-header.png" alt="الصفحة الرئيسية">
+                    <img src="/screenshots/absher-landing.png" alt="الصفحة الرئيسية">
                     <div class="screenshot-caption">
                         <h4>الصفحة الرئيسية</h4>
                         <p>عرض قائمة الطلبات السابقة</p>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="screenshots/mobile-step1.png" alt="نموذج الطلب">
+                    <img src="/screenshots/step1-mobile-updated.png" alt="نموذج الطلب">
                     <div class="screenshot-caption">
                         <h4>نموذج طلب السفر</h4>
                         <p>إدخال بيانات الرحلة</p>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="screenshots/mobile-step2.png" alt="إشعار الضامن">
+                    <img src="/screenshots/mobile-step2.png" alt="إشعار الضامن">
                     <div class="screenshot-caption">
                         <h4>إشعار الضامن</h4>
                         <p>طلب الموافقة على الكفالة</p>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="screenshots/permit-final.png" alt="تصريح السفر">
+                    <img src="/screenshots/permit-final.png" alt="تصريح السفر">
                     <div class="screenshot-caption">
                         <h4>تصريح السفر</h4>
                         <p>التصريح مع رمز QR</p>
