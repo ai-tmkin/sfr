@@ -342,6 +342,11 @@
   width: auto;
 }
 
+/* Hide line on first step - no line should appear before the first step */
+.stepper-step:first-child .step-line {
+  display: none;
+}
+
 /* Completed step has primary color line leading to it */
 .stepper-step.completed .step-line {
   background: var(--color-primary);
