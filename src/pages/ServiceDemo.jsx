@@ -24,9 +24,15 @@ function ServiceDemo() {
   const [showPermitPreview, setShowPermitPreview] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [showForm, setShowForm] = useState(false) // For Step 1 sub-view
+  
+  // Guarantor Information
+  const [guarantorName, setGuarantorName] = useState('')
+  const [guarantorId, setGuarantorId] = useState('')
+  const [isVerifying, setIsVerifying] = useState(false)
+  const [isVerified, setIsVerified] = useState(false)
+  const [verificationError, setVerificationError] = useState('')
 
   const ChevronIcon = direction === 'rtl' ? ChevronLeft : ChevronRight
-  const GUARANTOR_NAME = language === 'ar' ? 'خالد عبدالله العتيبي' : 'Khalid Abdullah Al-Otaibi'
   const DEBTOR_NAME = language === 'ar' ? 'أحمد محمد' : 'Ahmed Mohammed'
 
   // Calculate costs
@@ -36,6 +42,36 @@ function ServiceDemo() {
 
   const formatNumber = (num) => {
     return num.toLocaleString(language === 'ar' ? 'ar-SA' : 'en-US')
+  }
+
+  // Validate Saudi National ID
+  const validateSaudiId = (id) => {
+    // Must start with 1 and be exactly 10 digits
+    return /^1\d{9}$/.test(id)
+  }
+
+  // Handle Guarantor Verification
+  const handleVerifyGuarantor = () => {
+    setVerificationError('')
+    
+    // Validate name
+    if (!guarantorName.trim()) {
+      setVerificationError(language === 'ar' ? 'الرجاء إدخال اسم الضامن' : 'Please enter guarantor name')
+      return
+    }
+
+    // Validate ID
+    if (!validateSaudiId(guarantorId)) {
+      setVerificationError(language === 'ar' ? 'رقم الهوية يجب أن يبدأ برقم 1 ويتكون من 10 أرقام' : 'ID must start with 1 and be 10 digits')
+      return
+    }
+
+    setIsVerifying(true)
+    // Simulate API call for verification
+    setTimeout(() => {
+      setIsVerifying(false)
+      setIsVerified(true)
+    }, 2000)
   }
 
   const handleNextStep = () => {
@@ -245,12 +281,89 @@ function ServiceDemo() {
           </div>
         </div>
 
+        {/* Guarantor Information Card */}
+        <div className="absher-form-card">
+          <h3>{language === 'ar' ? 'بيانات الضامن' : 'Guarantor Information'}</h3>
+          
+          <div className="absher-form-grid">
+            <div className="absher-form-group">
+              <label>{language === 'ar' ? 'اسم الضامن' : 'Guarantor Name'}</label>
+              <input
+                type="text"
+                value={guarantorName}
+                onChange={(e) => setGuarantorName(e.target.value)}
+                placeholder={language === 'ar' ? 'مثال: خالد عبدالله العتيبي' : 'Example: Khalid Abdullah Al-Otaibi'}
+                disabled={isVerified}
+              />
+            </div>
+            <div className="absher-form-group">
+              <label>{language === 'ar' ? 'رقم هوية الضامن' : 'Guarantor ID Number'}</label>
+              <input
+                type="text"
+                value={guarantorId}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, '').slice(0, 10)
+                  setGuarantorId(value)
+                  setIsVerified(false)
+                  setVerificationError('')
+                }}
+                placeholder={language === 'ar' ? 'يبدأ برقم 1 وطوله 10 أرقام' : 'Starts with 1, 10 digits'}
+                disabled={isVerified}
+                maxLength={10}
+              />
+              <small className="form-hint">{language === 'ar' ? 'مثال: 1234567890' : 'Example: 1234567890'}</small>
+            </div>
+          </div>
+
+          {/* Verification Error */}
+          {verificationError && (
+            <div className="absher-info-banner error" style={{marginTop: '12px'}}>
+              <span>{verificationError}</span>
+            </div>
+          )}
+
+          {/* Verification Success */}
+          {isVerified && (
+            <div className="absher-info-banner success" style={{marginTop: '12px'}}>
+              <Check size={18} />
+              <span>{language === 'ar' ? 'تم التحقق من بيانات الضامن بنجاح' : 'Guarantor verified successfully'}</span>
+            </div>
+          )}
+
+          {/* Verify Button */}
+          {!isVerified && (
+            <button 
+              className="absher-primary-btn" 
+              onClick={handleVerifyGuarantor}
+              disabled={isVerifying}
+              style={{marginTop: '16px', width: '100%'}}
+            >
+              {isVerifying ? (
+                <>
+                  <AbsherLogoLoader className="btn-loader" />
+                  {language === 'ar' ? 'جاري التحقق...' : 'Verifying...'}
+                </>
+              ) : (
+                <>
+                  <Shield size={18} />
+                  {language === 'ar' ? 'تحقق من بيانات الضامن' : 'Verify Guarantor'}
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
         {/* Navigation Buttons */}
         <div className="absher-nav-buttons">
           <button className="absher-secondary-btn" onClick={() => setShowForm(false)}>
             {language === 'ar' ? 'السابق' : 'Previous'}
           </button>
-          <button className="absher-primary-btn" onClick={handleNextStep}>
+          <button 
+            className="absher-primary-btn" 
+            onClick={handleNextStep}
+            disabled={!isVerified}
+            style={{opacity: !isVerified ? 0.5 : 1, cursor: !isVerified ? 'not-allowed' : 'pointer'}}
+          >
             {language === 'ar' ? 'إرسال للضامن' : 'Send to Guarantor'}
             <ChevronIcon size={18} />
           </button>
@@ -275,7 +388,11 @@ function ServiceDemo() {
         <div className="status-details">
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'اسم الضامن:' : 'Guarantor Name:'}</span>
-            <span className="value">{GUARANTOR_NAME}</span>
+            <span className="value">{guarantorName}</span>
+          </div>
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'رقم هوية الضامن:' : 'Guarantor ID:'}</span>
+            <span className="value">{guarantorId}</span>
           </div>
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'المبلغ المطلوب ضمانه:' : 'Amount to Guarantee:'}</span>
@@ -605,7 +722,11 @@ function ServiceDemo() {
               
               <div className="permit-info-item">
                 <span className="permit-label">{language === 'ar' ? 'الضامن' : 'Guarantor'}</span>
-                <span className="permit-value">{GUARANTOR_NAME}</span>
+                <span className="permit-value">{guarantorName}</span>
+              </div>
+              <div className="permit-info-item">
+                <span className="permit-label">{language === 'ar' ? 'رقم الهوية' : 'ID Number'}</span>
+                <span className="permit-value">{guarantorId}</span>
               </div>
               
               <div className="permit-info-item">

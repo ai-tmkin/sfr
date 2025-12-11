@@ -376,6 +376,11 @@
   color: #2E7D32;
 }
 
+.absher-info-banner.error {
+  background: linear-gradient(90deg, #FFEBEE 0%, #FFCDD2 100%);
+  border-color: #EF9A9A;
+  color: #C62828;
+}
 
 .absher-info-banner svg {
   flex-shrink: 0;
@@ -2006,10 +2011,20 @@
   color: var(--color-primary);
 }
 
+.btn-loader {
+  width: 20px;
+  height: 30px;
+  color: currentColor;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 .absher-loading p {
   font-size: 14px;
-
   color: #666;
 }
 
