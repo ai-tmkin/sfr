@@ -291,7 +291,6 @@ function ServiceDemo() {
       {/* Phone Mockup */}
       <div className="absher-phone-mockup">
         <div className="phone-frame">
-          <div className="phone-notch"></div>
           <div className="phone-screen">
             <div className="phone-status-bar">
               <span>9:41</span>
@@ -331,7 +330,7 @@ function ServiceDemo() {
     </div>
   )
 
-  // Step 3: Creditor Approval (Internal Absher Step)
+  // Step 3: Creditor Approval (External Najiz App)
   const renderStep3 = () => (
     <div className="absher-step-content">
       {/* Success Banner */}
@@ -340,72 +339,96 @@ function ServiceDemo() {
         <span>{language === 'ar' ? 'تم قبول الضامن - الكفالة المالية جاهزة' : 'Guarantor accepted - Financial guarantee ready'}</span>
       </div>
 
-      {/* Creditor Request Card */}
-      <div className="absher-request-card">
-        <div className="request-card-header">
-          <div className="request-icon-wrapper">
-            <Plane size={24} />
-          </div>
-          <div className="request-info">
-            <h3>{language === 'ar' ? 'طلب تصريح سفر #88992' : 'Travel Permit Request #88992'}</h3>
-            <span className="request-time">{language === 'ar' ? 'منذ 2 دقيقة' : '2 minutes ago'}</span>
-          </div>
+      {/* Status Card */}
+      <div className="absher-status-card">
+        <div className="status-header">
+          <h3>{language === 'ar' ? 'حالة الطلب' : 'Request Status'}</h3>
           <span className="status-badge pending">{language === 'ar' ? 'بانتظار موافقة الدائن' : 'Pending Creditor Approval'}</span>
         </div>
-
-        <div className="request-card-body">
-          <div className="request-detail-grid">
-            <div className="request-detail-item">
-              <span className="detail-label">{language === 'ar' ? 'اسم المدين' : 'Debtor Name'}</span>
-              <span className="detail-value">{DEBTOR_NAME}</span>
-            </div>
-            <div className="request-detail-item">
-              <span className="detail-label">{language === 'ar' ? 'اسم الضامن' : 'Guarantor Name'}</span>
-              <span className="detail-value">{GUARANTOR_NAME}</span>
-            </div>
-            <div className="request-detail-item">
-              <span className="detail-label">{language === 'ar' ? 'الوجهة' : 'Destination'}</span>
-              <span className="detail-value">{destination}</span>
-            </div>
-            <div className="request-detail-item">
-              <span className="detail-label">{language === 'ar' ? 'مدة السفر' : 'Duration'}</span>
-              <span className="detail-value">{days} {language === 'ar' ? 'يوم' : 'days'}</span>
-            </div>
+        <div className="status-details">
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'اسم الدائن:' : 'Creditor Name:'}</span>
+            <span className="value">{language === 'ar' ? 'شركة التمويل العربي' : 'Arab Finance Company'}</span>
           </div>
-
-          <div className="request-schedule-info">
-            <h4>{language === 'ar' ? 'تفاصيل جدول السداد' : 'Payment Schedule Details'}</h4>
-            <div className="schedule-row">
-              <span>{language === 'ar' ? 'نوع الجدولة:' : 'Schedule Type:'}</span>
-              <span>{language === 'ar' ? 'خصم يومي تلقائي (1%)' : 'Auto daily deduction (1%)'}</span>
-            </div>
-            <div className="schedule-row">
-              <span>{language === 'ar' ? 'المبلغ اليومي:' : 'Daily Amount:'}</span>
-              <span>{formatNumber(dailyAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
-            </div>
-            <div className="schedule-row total">
-              <span>{language === 'ar' ? 'المبلغ المتوقع تحصيله:' : 'Expected Collection:'}</span>
-              <span>{formatNumber(totalCost)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
-            </div>
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'المبلغ المتوقع تحصيله:' : 'Expected Collection:'}</span>
+            <span className="value">{formatNumber(totalCost)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
           </div>
-
-          <div className="guarantee-status-box">
-            <Check size={20} />
-            <div>
-              <span className="guarantee-title">{language === 'ar' ? 'الضمان المالي متوفر' : 'Financial Guarantee Available'}</span>
-              <span className="guarantee-desc">{language === 'ar' ? 'تم التحقق من توفر المبلغ في محفظة الضامن' : 'Amount verified in guarantor wallet'}</span>
-            </div>
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'نوع السداد:' : 'Payment Type:'}</span>
+            <span className="value">{language === 'ar' ? 'خصم يومي تلقائي (1%)' : 'Auto daily deduction (1%)'}</span>
           </div>
         </div>
+      </div>
 
-        <div className="request-card-actions">
-          <button className="absher-primary-btn" onClick={handleNextStep}>
-            <Check size={18} />
-            {language === 'ar' ? 'الموافقة على جدول السداد' : 'Approve Payment Schedule'}
-          </button>
-          <button className="absher-danger-btn">
-            {language === 'ar' ? 'رفض الطلب' : 'Reject Request'}
-          </button>
+      {/* Phone Mockup - Najiz App */}
+      <div className="absher-phone-mockup">
+        <div className="phone-frame najiz-theme">
+          <div className="phone-screen">
+            <div className="phone-status-bar">
+              <span>9:41</span>
+              <div className="status-icons">
+                <span>📶</span>
+                <span>🔋</span>
+              </div>
+            </div>
+            <div className="phone-app-header najiz">
+              <span>{language === 'ar' ? 'ناجز' : 'Najiz'}</span>
+              <Shield size={18} />
+            </div>
+            <div className="phone-content najiz-content">
+              <div className="notification-card najiz-card">
+                <div className="najiz-notification-header">
+                  <div className="najiz-icon">
+                    <Plane size={20} />
+                  </div>
+                  <div className="najiz-badge">
+                    {language === 'ar' ? 'طلب جديد' : 'New Request'}
+                  </div>
+                </div>
+                <h4>{language === 'ar' ? 'طلب موافقة على سفر مدين' : 'Debtor Travel Approval Request'}</h4>
+                <p className="najiz-request-id">#88992</p>
+                
+                <div className="najiz-details-grid">
+                  <div className="najiz-detail-row">
+                    <span className="najiz-label">{language === 'ar' ? 'اسم المدين' : 'Debtor Name'}</span>
+                    <span className="najiz-value">{DEBTOR_NAME}</span>
+                  </div>
+                  <div className="najiz-detail-row">
+                    <span className="najiz-label">{language === 'ar' ? 'الوجهة' : 'Destination'}</span>
+                    <span className="najiz-value">{destination}</span>
+                  </div>
+                  <div className="najiz-detail-row">
+                    <span className="najiz-label">{language === 'ar' ? 'مدة السفر' : 'Duration'}</span>
+                    <span className="najiz-value">{days} {language === 'ar' ? 'يوم' : 'days'}</span>
+                  </div>
+                  <div className="najiz-detail-row">
+                    <span className="najiz-label">{language === 'ar' ? 'المبلغ اليومي' : 'Daily Amount'}</span>
+                    <span className="najiz-value highlight">{formatNumber(dailyAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+                  </div>
+                  <div className="najiz-detail-row total-row">
+                    <span className="najiz-label">{language === 'ar' ? 'إجمالي التحصيل' : 'Total Collection'}</span>
+                    <span className="najiz-value highlight">{formatNumber(totalCost)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+                  </div>
+                </div>
+
+                <div className="najiz-guarantee-badge">
+                  <Check size={16} />
+                  <span>{language === 'ar' ? 'ضمان مالي مؤكد من الكفيل' : 'Confirmed financial guarantee'}</span>
+                </div>
+
+                <div className="notification-buttons">
+                  <button className="accept-btn najiz-accept" onClick={handleNextStep}>
+                    <Check size={16} />
+                    {language === 'ar' ? 'موافقة' : 'Approve'}
+                  </button>
+                  <button className="reject-btn najiz-reject">
+                    {language === 'ar' ? 'رفض' : 'Reject'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -637,14 +660,8 @@ function ServiceDemo() {
 
           {/* Page Title */}
           <div className="absher-page-title">
-            <Plane size={24} />
-            <h1>{language === 'ar' ? 'أبشر سفر - طلب تصريح سفر' : 'Absher Safar - Travel Permit Request'}</h1>
-          </div>
-
-          {/* Content Title Header */}
-          <div className="content-title-header">
             <Plane size={20} />
-            <h2>{language === 'ar' ? 'أبشر سفر - طلب تصريح سفر جديد' : 'Absher Safar - New Travel Permit Request'}</h2>
+            <h1>{language === 'ar' ? 'أبشر سفر - طلب تصريح سفر جديد' : 'Absher Safar - New Travel Permit Request'}</h1>
           </div>
 
           {/* Stepper */}
