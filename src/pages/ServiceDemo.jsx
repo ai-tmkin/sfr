@@ -20,7 +20,7 @@ function ServiceDemo() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [destination, setDestination] = useState(language === 'ar' ? 'دبي، الإمارات' : 'Dubai, UAE')
-  const [days, setDays] = useState(5)
+  const [days, setDays] = useState(10)
   const [showPermitPreview, setShowPermitPreview] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [showForm, setShowForm] = useState(false) // For Step 1 sub-view
@@ -103,8 +103,8 @@ function ServiceDemo() {
     {
       id: 'TR-2024-45123',
       destination: language === 'ar' ? 'القاهرة، مصر' : 'Cairo, Egypt',
-      duration: language === 'ar' ? '7 أيام' : '7 days',
-      amount: '26,250',
+      duration: language === 'ar' ? '12 أيام' : '12 days',
+      amount: '45,000',
       status: language === 'ar' ? 'مكتمل' : 'Completed',
       statusClass: 'completed',
       date: '2024-08-15'
@@ -112,8 +112,8 @@ function ServiceDemo() {
     {
       id: 'TR-2024-38901',
       destination: language === 'ar' ? 'عمّان، الأردن' : 'Amman, Jordan',
-      duration: language === 'ar' ? '6 أيام' : '6 days',
-      amount: '22,500',
+      duration: language === 'ar' ? '11 أيام' : '11 days',
+      amount: '41,250',
       status: language === 'ar' ? 'مكتمل' : 'Completed',
       statusClass: 'completed',
       date: '2024-06-20'
@@ -139,8 +139,8 @@ function ServiceDemo() {
     {
       id: 'TR-2023-65432',
       destination: language === 'ar' ? 'لندن، المملكة المتحدة' : 'London, UK',
-      duration: language === 'ar' ? '5 أيام' : '5 days',
-      amount: '18,750',
+      duration: language === 'ar' ? '10 أيام' : '10 days',
+      amount: '37,500',
       status: language === 'ar' ? 'ملغي' : 'Cancelled',
       statusClass: 'cancelled',
       date: '2023-09-22'
@@ -265,10 +265,10 @@ function ServiceDemo() {
               <input
                 type="number"
                 value={days}
-                min={5}
-                onChange={(e) => setDays(Math.max(5, parseInt(e.target.value) || 5))}
+                min={10}
+                onChange={(e) => setDays(Math.max(10, parseInt(e.target.value) || 10))}
               />
-              <small className="form-hint">{language === 'ar' ? 'الحد الأدنى 5 أيام' : 'Minimum 5 days'}</small>
+              <small className="form-hint">{language === 'ar' ? 'الحد الأدنى 10 أيام' : 'Minimum 10 days'}</small>
             </div>
           </div>
 
@@ -299,9 +299,12 @@ function ServiceDemo() {
               <input
                 type="text"
                 value={guarantorName}
-                onChange={(e) => setGuarantorName(e.target.value)}
+                onChange={(e) => {
+                  setGuarantorName(e.target.value)
+                  setIsVerified(false)
+                  setVerificationError('')
+                }}
                 placeholder={language === 'ar' ? 'مثال: خالد عبدالله العتيبي' : 'Example: Khalid Abdullah Al-Otaibi'}
-                disabled={isVerified}
               />
             </div>
             <div className="absher-form-group">
@@ -316,7 +319,6 @@ function ServiceDemo() {
                   setVerificationError('')
                 }}
                 placeholder={language === 'ar' ? 'يبدأ برقم 1 وطوله 10 أرقام' : 'Starts with 1, 10 digits'}
-                disabled={isVerified}
                 maxLength={10}
               />
               <small className="form-hint">{language === 'ar' ? 'مثال: 1234567890' : 'Example: 1234567890'}</small>
@@ -481,7 +483,7 @@ function ServiceDemo() {
           </div>
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'نوع السداد:' : 'Payment Type:'}</span>
-            <span className="value">{language === 'ar' ? 'خصم يومي تلقائي (1%)' : 'Auto daily deduction (1%)'}</span>
+            <span className="value">{language === 'ar' ? 'خصم فوري' : 'Auto daily deduction (1%)'}</span>
           </div>
         </div>
       </div>
