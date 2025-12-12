@@ -11,9 +11,9 @@ const AbsherLogoLoader = ({ className = '' }) => (
   </svg>
 )
 
-const TOTAL_DEBT = 250000
+const INITIAL_TOTAL_DEBT = 250000
 const DAILY_RATE = 0.01
-const RESERVE_MULTIPLIER = 1.5
+const DEPOSIT_RATE = 0.5 // 50% deposit taken upfront, refunded if user returns on time
 
 function ServiceDemo() {
   const { t, language, direction } = useLanguage()
@@ -43,14 +43,96 @@ function ServiceDemo() {
   const DEBTOR_NAME = language === 'ar' ? 'أحمد محمد' : 'Ahmed Mohammed'
   const DEBTOR_ID = '1987654321' // هوية صاحب الحساب (المدين)
 
-  // Calculate costs
-  const dailyAmount = TOTAL_DEBT * DAILY_RATE
-  const totalCost = dailyAmount * days
-  const requiredAmount = totalCost * RESERVE_MULTIPLIER
-
   const formatNumber = (num) => {
     return num.toLocaleString(language === 'ar' ? 'ar-SA' : 'en-US')
   }
+
+  // Previous travel requests data with days for calculation
+  const previousRequestsBase = [
+    {
+      id: 'TR-2024-45123',
+      destination: language === 'ar' ? 'القاهرة، مصر' : 'Cairo, Egypt',
+      daysNum: 12,
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2024-08-15'
+    },
+    {
+      id: 'TR-2024-38901',
+      destination: language === 'ar' ? 'عمّان، الأردن' : 'Amman, Jordan',
+      daysNum: 11,
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2024-06-20'
+    },
+    {
+      id: 'TR-2024-29876',
+      destination: language === 'ar' ? 'إسطنبول، تركيا' : 'Istanbul, Turkey',
+      daysNum: 10,
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2024-03-10'
+    },
+    {
+      id: 'TR-2023-87654',
+      destination: language === 'ar' ? 'كوالالمبور، ماليزيا' : 'Kuala Lumpur, Malaysia',
+      daysNum: 14,
+      status: language === 'ar' ? 'مكتمل' : 'Completed',
+      statusClass: 'completed',
+      date: '2023-12-01'
+    },
+    {
+      id: 'TR-2023-65432',
+      destination: language === 'ar' ? 'لندن، المملكة المتحدة' : 'London, UK',
+      daysNum: 10,
+      status: language === 'ar' ? 'ملغي' : 'Cancelled',
+      statusClass: 'cancelled',
+      date: '2023-09-22'
+    },
+  ]
+
+  // Sort by date (oldest first) and calculate paid amounts progressively
+  // Paid Amount = days * 1% of total debt at that time
+  const sortedByDate = [...previousRequestsBase].sort((a, b) => 
+    new Date(a.date) - new Date(b.date)
+  )
+  
+  let runningDebt = INITIAL_TOTAL_DEBT
+  const requestsWithPaidAmount = sortedByDate.map(request => {
+    let paidAmount = 0
+    
+    if (request.statusClass === 'completed') {
+      // Paid amount = days * 1% of current debt
+      paidAmount = request.daysNum * DAILY_RATE * runningDebt
+      runningDebt -= paidAmount
+    }
+    
+    return {
+      ...request,
+      duration: language === 'ar' ? `${request.daysNum} ${request.daysNum > 10 ? 'يوم' : 'أيام'}` : `${request.daysNum} days`,
+      paidAmount: Math.round(paidAmount)
+    }
+  })
+  
+  // Sort back by date descending (most recent first) for display
+  const previousRequests = [...requestsWithPaidAmount].sort((a, b) => 
+    new Date(b.date) - new Date(a.date)
+  )
+
+  // Calculate total paid from completed requests
+  const totalPaidFromCompleted = previousRequests
+    .filter(req => req.statusClass === 'completed')
+    .reduce((sum, req) => sum + req.paidAmount, 0)
+  
+  // Current remaining debt after all completed payments
+  const TOTAL_DEBT = INITIAL_TOTAL_DEBT - totalPaidFromCompleted
+
+  // Calculate costs based on remaining debt
+  // Paid Amount = days * 1% of total debt
+  const dailyAmount = TOTAL_DEBT * DAILY_RATE
+  const paidAmount = dailyAmount * days // المبلغ المسدد - the actual amount to be paid
+  const depositAmount = paidAmount * DEPOSIT_RATE // 50% deposit, refunded if user returns on time
+  const totalToLoad = paidAmount + depositAmount // Total to load in wallet
 
   // Validate Saudi National ID
   const validateSaudiId = (id) => {
@@ -96,55 +178,6 @@ function ServiceDemo() {
     { number: 3, label: language === 'ar' ? 'موافقة الدائن' : 'Creditor Approval' },
     { number: 4, label: language === 'ar' ? 'شحن المحفظة' : 'Load Wallet' },
     { number: 5, label: language === 'ar' ? 'إصدار التصريح' : 'Issue Permit' },
-  ]
-
-  // Previous travel requests data
-  const previousRequests = [
-    {
-      id: 'TR-2024-45123',
-      destination: language === 'ar' ? 'القاهرة، مصر' : 'Cairo, Egypt',
-      duration: language === 'ar' ? '12 أيام' : '12 days',
-      amount: '45,000',
-      status: language === 'ar' ? 'مكتمل' : 'Completed',
-      statusClass: 'completed',
-      date: '2024-08-15'
-    },
-    {
-      id: 'TR-2024-38901',
-      destination: language === 'ar' ? 'عمّان، الأردن' : 'Amman, Jordan',
-      duration: language === 'ar' ? '11 أيام' : '11 days',
-      amount: '41,250',
-      status: language === 'ar' ? 'مكتمل' : 'Completed',
-      statusClass: 'completed',
-      date: '2024-06-20'
-    },
-    {
-      id: 'TR-2024-29876',
-      destination: language === 'ar' ? 'إسطنبول، تركيا' : 'Istanbul, Turkey',
-      duration: language === 'ar' ? '10 أيام' : '10 days',
-      amount: '37,500',
-      status: language === 'ar' ? 'مكتمل' : 'Completed',
-      statusClass: 'completed',
-      date: '2024-03-10'
-    },
-    {
-      id: 'TR-2023-87654',
-      destination: language === 'ar' ? 'كوالالمبور، ماليزيا' : 'Kuala Lumpur, Malaysia',
-      duration: language === 'ar' ? '14 يوم' : '14 days',
-      amount: '52,500',
-      status: language === 'ar' ? 'مكتمل' : 'Completed',
-      statusClass: 'completed',
-      date: '2023-12-01'
-    },
-    {
-      id: 'TR-2023-65432',
-      destination: language === 'ar' ? 'لندن، المملكة المتحدة' : 'London, UK',
-      duration: language === 'ar' ? '10 أيام' : '10 days',
-      amount: '37,500',
-      status: language === 'ar' ? 'ملغي' : 'Cancelled',
-      statusClass: 'cancelled',
-      date: '2023-09-22'
-    },
   ]
 
   // Render Loading State
@@ -204,7 +237,7 @@ function ServiceDemo() {
                   <th>{language === 'ar' ? 'رقم الطلب' : 'Request #'}</th>
                   <th>{language === 'ar' ? 'الوجهة' : 'Destination'}</th>
                   <th>{language === 'ar' ? 'مدة السفر' : 'Duration'}</th>
-                  <th>{language === 'ar' ? 'المبلغ المطلوب' : 'Required Amount'}</th>
+                  <th>{language === 'ar' ? 'المبلغ المسدد' : 'Paid Amount'}</th>
                   <th>{language === 'ar' ? 'الحالة' : 'Status'}</th>
                   <th>{language === 'ar' ? 'المهام' : 'Actions'}</th>
                 </tr>
@@ -215,7 +248,7 @@ function ServiceDemo() {
                     <td className="request-id">{request.id}</td>
                     <td>{request.destination}</td>
                     <td>{request.duration}</td>
-                    <td>{request.amount} {language === 'ar' ? 'ر.س' : 'SAR'}</td>
+                    <td>{formatNumber(request.paidAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</td>
                     <td>
                       <span className={`status-badge ${request.statusClass}`}>
                         {request.status}
@@ -282,9 +315,20 @@ function ServiceDemo() {
               <span>{language === 'ar' ? 'إجمالي أيام الرحلة' : 'Total Trip Days'}</span>
               <span>{days} {language === 'ar' ? 'يوم' : 'days'}</span>
             </div>
+            <div className="cost-row">
+              <span>{language === 'ar' ? 'المبلغ المسدد' : 'Paid Amount'}</span>
+              <span>{formatNumber(paidAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+            </div>
+            <div className="cost-row">
+              <span>{language === 'ar' ? 'مبلغ التأمين (50%)' : 'Deposit (50%)'}</span>
+              <span>{formatNumber(depositAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+            </div>
+            <div className="cost-row info-note">
+              <span>{language === 'ar' ? '* يُسترد التأمين عند العودة في الموعد المحدد' : '* Deposit refunded if you return on time'}</span>
+            </div>
             <div className="cost-row total">
-              <span>{language === 'ar' ? 'المبلغ المطلوب شحنه' : 'Amount to Load'}</span>
-              <span>{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+              <span>{language === 'ar' ? 'إجمالي المبلغ المطلوب شحنه' : 'Total Amount to Load'}</span>
+              <span>{formatNumber(totalToLoad)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
             </div>
           </div>
         </div>
@@ -406,7 +450,7 @@ function ServiceDemo() {
           </div>
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'المبلغ المطلوب ضمانه:' : 'Amount to Guarantee:'}</span>
-            <span className="value">{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+            <span className="value">{formatNumber(totalToLoad)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
           </div>
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'مدة السفر:' : 'Duration:'}</span>
@@ -437,7 +481,7 @@ function ServiceDemo() {
                 <p>{language === 'ar' ? `وردك طلب كفالة سفر من ${DEBTOR_NAME}` : `You received a travel guarantee request from ${DEBTOR_NAME}`}</p>
                 <div className="notification-details">
                   <div><span>{language === 'ar' ? 'الوجهة:' : 'Destination:'}</span> {destination}</div>
-                  <div><span>{language === 'ar' ? 'المبلغ:' : 'Amount:'}</span> {formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</div>
+                  <div><span>{language === 'ar' ? 'المبلغ:' : 'Amount:'}</span> {formatNumber(totalToLoad)} {language === 'ar' ? 'ر.س' : 'SAR'}</div>
                 </div>
                 <div className="notification-buttons">
                   <button className="accept-btn" onClick={handleNextStep}>{language === 'ar' ? 'قبول' : 'Accept'}</button>
@@ -479,7 +523,7 @@ function ServiceDemo() {
           </div>
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'المبلغ المتوقع تحصيله:' : 'Expected Collection:'}</span>
-            <span className="value">{formatNumber(totalCost)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+            <span className="value">{formatNumber(paidAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
           </div>
           <div className="detail-item">
             <span className="label">{language === 'ar' ? 'نوع السداد:' : 'Payment Type:'}</span>
@@ -535,7 +579,7 @@ function ServiceDemo() {
                   </div>
                   <div className="najiz-detail-row total-row">
                     <span className="najiz-label">{language === 'ar' ? 'إجمالي التحصيل' : 'Total Collection'}</span>
-                    <span className="najiz-value highlight">{formatNumber(totalCost)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+                    <span className="najiz-value highlight">{formatNumber(paidAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
                   </div>
                 </div>
 
@@ -583,8 +627,16 @@ function ServiceDemo() {
         </div>
         <div className="status-details">
           <div className="detail-item">
-            <span className="label">{language === 'ar' ? 'المبلغ المطلوب:' : 'Amount Required:'}</span>
-            <span className="value">{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+            <span className="label">{language === 'ar' ? 'المبلغ المسدد:' : 'Paid Amount:'}</span>
+            <span className="value">{formatNumber(paidAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+          </div>
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'مبلغ التأمين (50%):' : 'Deposit (50%):'}</span>
+            <span className="value">{formatNumber(depositAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
+          </div>
+          <div className="detail-item">
+            <span className="label">{language === 'ar' ? 'إجمالي المبلغ المطلوب:' : 'Total Amount Required:'}</span>
+            <span className="value">{formatNumber(totalToLoad)} {language === 'ar' ? 'ر.س' : 'SAR'}</span>
           </div>
         </div>
       </div>
@@ -608,7 +660,7 @@ function ServiceDemo() {
               <div className="notification-card payment-form-card">
                 <CreditCard size={24} />
                 <h4>{language === 'ar' ? 'شحن المحفظة' : 'Load Wallet'}</h4>
-                <p className="payment-amount-display">{formatNumber(requiredAmount)} {language === 'ar' ? 'ر.س' : 'SAR'}</p>
+                <p className="payment-amount-display">{formatNumber(totalToLoad)} {language === 'ar' ? 'ر.س' : 'SAR'}</p>
                 
                 <div className="card-input-form">
                   <div className="form-input-group">

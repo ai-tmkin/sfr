@@ -701,6 +701,16 @@
   color: var(--color-primary);
 }
 
+.cost-row.info-note {
+  background: rgba(var(--color-primary-rgb, 84, 64, 153), 0.03);
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+  padding: 10px 20px;
+  justify-content: center;
+  border-bottom: none;
+}
+
 
 /* Navigation Buttons */
 .absher-nav-buttons {
