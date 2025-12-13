@@ -61,60 +61,12 @@ const ZoomOutIcon = () => (
 function Footer() {
   const { language } = useLanguage()
 
-  const aboutLinks = language === 'ar' ? [
-    'عن أبشر',
-    'سياسة الخصوصية',
-    'شروط الاستخدام',
-    'الأخبار',
-    'اتفاقية مستوى الخدمة',
-    'أدوات سهولة الوصول',
-    'بيانات إحصائية',
-    'أمن المعلومات',
-  ] : [
-    'About Absher',
-    'Privacy Policy',
-    'Terms of Use',
-    'News',
-    'Service Level Agreement',
-    'Accessibility Tools',
-    'Statistical Data',
-    'Information Security',
-  ]
-
-  const helpLinks = language === 'ar' ? [
-    'اتصل بنا',
-    'بلاغ عن فساد (نزاهة)',
-    'الأسئلة الشائعة',
-    'قنوات الخدمة',
-    'قنوات تفعيل الهوية الوطنية الرقمية',
-    'التسجيل والاشتراك',
-  ] : [
-    'Contact Us',
-    'Report Corruption (Nazaha)',
-    'FAQ',
-    'Service Channels',
-    'Digital ID Activation Channels',
-    'Registration & Subscription',
-  ]
-
-  const importantLinks = language === 'ar' ? [
-    'بوابة وزارة الداخلية',
-    'المنصة الوطنية الموحدة',
-    'الاستراتيجية الوطنية للبيانات والذكاء الاصطناعي',
-    'منصة البيانات المفتوحة',
-    'بوابة المشاركة الالكترونية',
-    'منصة الاستشارات القانونية (استطلاع)',
-    'منصة الخدمات المالية (اعتماد)',
-    'تطبيقات الهاتف المحمول الحكومية',
-  ] : [
-    'Ministry of Interior Portal',
-    'National Unified Platform',
-    'National Strategy for Data and AI',
-    'Open Data Platform',
-    'E-Participation Portal',
-    'Legal Consultation Platform (Istitlaa)',
-    'Financial Services Platform (Etimad)',
-    'Government Mobile Apps',
+  // Navigation links matching actual pages in the app
+  const navLinks = [
+    { to: '/', labelAr: 'الرئيسية', labelEn: 'Home' },
+    { to: '/servicedemo', labelAr: 'تنفيذ الخدمة', labelEn: 'Execute Service' },
+    { to: '/faq', labelAr: 'الأسئلة الشائعة', labelEn: 'FAQ' },
+    { to: '/settings', labelAr: 'الإعدادات', labelEn: 'Settings' },
   ]
 
   return (
@@ -122,9 +74,38 @@ function Footer() {
       {/* Main Footer */}
       <div className="footer-main-v2">
         <div className="footer-container">
-          {/* Brand Column */}
+          {/* Quick Navigation - First on right in RTL */}
+          <div className="footer-link-column">
+            <h4>{language === 'ar' ? 'روابط سريعة' : 'Quick Links'}</h4>
+            <ul>
+              {navLinks.map((link, index) => (
+                <li key={index}>
+                  <Link to={link.to}>{language === 'ar' ? link.labelAr : link.labelEn}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social Media & Help Tools Column */}
+          <div className="footer-link-column footer-social-column">
+            <h4>{language === 'ar' ? 'تواصل معنا' : 'Connect With Us'}</h4>
+            <div className="social-icons-row">
+              <a href="https://www.snapchat.com/add/absher.sa" target="_blank" rel="noopener noreferrer" title="Snapchat"><SnapchatIcon /></a>
+              <a href="https://www.facebook.com/AbsherKSA" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>
+              <a href="https://twitter.com/absher" target="_blank" rel="noopener noreferrer" title="X"><TwitterIcon /></a>
+              <a href="http://www.youtube.com/user/moigovsa" target="_blank" rel="noopener noreferrer" title="YouTube"><YoutubeIcon /></a>
+            </div>
+            
+            <h4 className="mt-3">{language === 'ar' ? 'أدوات المساعدة' : 'Accessibility'}</h4>
+            <div className="accessibility-icons">
+              <button title={language === 'ar' ? 'التباين' : 'Contrast'}><ContrastIcon /></button>
+              <button title={language === 'ar' ? 'تكبير' : 'Zoom In'}><ZoomInIcon /></button>
+              <button title={language === 'ar' ? 'تصغير' : 'Zoom Out'}><ZoomOutIcon /></button>
+            </div>
+          </div>
+
+          {/* Brand Column - Center/Last */}
           <div className="footer-brand-column">
-            {/* Logo and Phone with green background */}
             <div className="brand-logo-phone">
               <div className="brand-logo">
                 <AbsherLogoSVG />
@@ -133,77 +114,9 @@ function Footer() {
                 920020405
               </a>
             </div>
-            <div className="app-downloads-v2">
-              <a href="https://apps.apple.com/sa/app/absher-%D8%A3%D8%A8%D8%B4%D8%B1/id1004966456" target="_blank" rel="noopener noreferrer">
-                <img src="https://www.absher.sa/portal/individuals/assets/images/donwloads/app-store.svg" alt="App Store" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=sa.gov.moi" target="_blank" rel="noopener noreferrer">
-                <img src="https://www.absher.sa/portal/individuals/assets/images/donwloads/google-play.svg" alt="Google Play" />
-              </a>
-              <a href="https://appgallery.huawei.com/#/app/C101687609" target="_blank" rel="noopener noreferrer">
-                <img src="https://www.absher.sa/portal/individuals/assets/images/donwloads/app-gallary.svg" alt="App Gallery" />
-              </a>
-            </div>
             <div className="registered-badge">
-              <span>Registered on</span>
+              <span>{language === 'ar' ? 'مسجل في' : 'Registered on'}</span>
               <img src="https://raqmi.dga.gov.sa/PlatformsApi/api/Attachments/27640802-9445-4107-b190-b29c00e936c2" alt="Raqmi" />
-            </div>
-          </div>
-
-          {/* Links Container */}
-          <div className="footer-links-container">
-            {/* Social Media Column */}
-            <div className="footer-link-column">
-              <h4>{language === 'ar' ? 'وسائل التواصل الاجتماعي' : 'Social Media'}</h4>
-              <div className="social-icons-row">
-                <a href="https://www.snapchat.com/add/absher.sa" target="_blank" rel="noopener noreferrer" title="Snapchat"><SnapchatIcon /></a>
-                <a href="https://www.facebook.com/AbsherKSA" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>
-                <a href="https://twitter.com/absher" target="_blank" rel="noopener noreferrer" title="X"><TwitterIcon /></a>
-                <a href="http://www.youtube.com/user/moigovsa" target="_blank" rel="noopener noreferrer" title="YouTube"><YoutubeIcon /></a>
-              </div>
-              
-              <h4 className="mt-3">{language === 'ar' ? 'أدوات المساعدة' : 'Help Tools'}</h4>
-              <div className="accessibility-icons">
-                <button title="Contrast"><ContrastIcon /></button>
-                <button title="Zoom In"><ZoomInIcon /></button>
-                <button title="Zoom Out"><ZoomOutIcon /></button>
-              </div>
-            </div>
-
-            {/* About Absher Column */}
-            <div className="footer-link-column">
-              <h4>{language === 'ar' ? 'عن منصة أبشر' : 'About Absher'}</h4>
-              <ul>
-                {aboutLinks.map((link, index) => (
-                  <li key={index}><a href="#">{link}</a></li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Help & Support Column */}
-            <div className="footer-link-column">
-              <h4>{language === 'ar' ? 'المساعدة والدعم' : 'Help & Support'}</h4>
-              <ul>
-                {helpLinks.map((link, index) => (
-                  <li key={index}>
-                    {link === 'الأسئلة الشائعة' || link === 'FAQ' ? (
-                      <Link to="/faq">{link}</Link>
-                    ) : (
-                      <a href="#">{link}</a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Important Links Column */}
-            <div className="footer-link-column">
-              <h4>{language === 'ar' ? 'روابط مهمة' : 'Important Links'}</h4>
-              <ul>
-                {importantLinks.map((link, index) => (
-                  <li key={index}><a href="#">{link}</a></li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>

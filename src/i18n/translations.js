@@ -45,7 +45,7 @@ export const translations = {
       infoCards: {
         targetGroup: {
           title: 'الفئة المستهدفة',
-          items: ['المواطنون والمقيمون', 'أصحاب المديونيات المتعثرة', 'الدائنون (أفراد، شركات، جهات حكومية)'],
+          items: ['أصحاب المديونيات المتعثرة', 'الدائنون (أفراد، شركات، جهات حكومية)'],
         },
         duration: {
           title: 'مدة التنفيذ',
@@ -297,7 +297,7 @@ export const translations = {
       infoCards: {
         targetGroup: {
           title: 'Target Group',
-          items: ['Citizens and Residents', 'Defaulted Debtors', 'Creditors (Individuals, Companies, Government)'],
+          items: ['Defaulted Debtors', 'Creditors (Individuals, Companies, Government)'],
         },
         duration: {
           title: 'Execution Time',

@@ -822,12 +822,48 @@ input, select, textarea {
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
-  gap: 32px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
 }
 
-/* In RTL, reverse the order so brand column is on the LEFT */
-[dir="rtl"] .footer-main-v2 .footer-container {
-  flex-direction: row-reverse;
+/* Footer Link Columns */
+.footer-link-column {
+  flex: 1;
+  min-width: 0;
+}
+
+.footer-link-column h4 {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.footer-link-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-link-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-link-column ul li a {
+  color: #555;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link-column ul li a:hover {
+  color: var(--color-primary);
+}
+
+/* Social Column Specific */
+.footer-social-column {
+  flex: 1.2;
 }
 
 /* Brand Column */
@@ -836,14 +872,13 @@ input, select, textarea {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  min-width: 200px;
   flex-shrink: 0;
 }
 
-/* Logo and Phone wrapper with green background */
+/* Logo and Phone wrapper with primary background */
 .brand-logo-phone {
   background-color: var(--color-primary);
-  padding: 20px 24px;
+  padding: 20px 28px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -856,16 +891,21 @@ input, select, textarea {
 }
 
 .brand-logo .logo {
-  width: 50px;
-  height: 75px;
+  width: 45px;
+  height: 68px;
 }
 
 .brand-phone {
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   text-decoration: none;
   direction: ltr;
+  letter-spacing: 1px;
+}
+
+.brand-phone:hover {
+  opacity: 0.9;
 }
 
 .app-downloads-v2 {
@@ -888,71 +928,35 @@ input, select, textarea {
 
 .registered-badge {
   background: white;
-  padding: 8px 12px;
+  padding: 10px 16px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  margin-top: 8px;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .registered-badge span {
-  font-size: 10px;
+  font-size: 11px;
   color: #666;
 }
 
 .registered-badge img {
-  height: 40px;
+  height: 36px;
   width: auto;
-}
-
-/* Footer Links Container */
-.footer-links-container {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-}
-
-.footer-link-column h4 {
-  color: var(--color-text-primary);
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.footer-link-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-link-column ul li {
-  margin-bottom: 8px;
-}
-
-.footer-link-column ul li a {
-  color: #666;
-  font-size: 13px;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.footer-link-column ul li a:hover {
-  color: var(--color-primary);
 }
 
 /* Social Icons */
 .social-icons-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .social-icons-row a {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid #DDD;
   display: flex;
@@ -967,17 +971,19 @@ input, select, textarea {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: white;
+  transform: translateY(-2px);
 }
 
 /* Accessibility Icons */
 .accessibility-icons {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .accessibility-icons button {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid #DDD;
   display: flex;
@@ -993,6 +999,7 @@ input, select, textarea {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: white;
+  transform: translateY(-2px);
 }
 
 .accessibility-icons button svg {
@@ -1000,14 +1007,14 @@ input, select, textarea {
 }
 
 .mt-3 {
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 /* Copyright Bar V2 */
 .footer-copyright-v2 {
-  background-color: #F0F0F0;
+  background-color: #EAEAEA;
   padding: 16px 0;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #DDD;
 }
 
 .footer-copyright-v2 .footer-container {
@@ -1025,7 +1032,7 @@ input, select, textarea {
 }
 
 .copyright-links a {
-  color: #666;
+  color: #555;
   font-size: 13px;
   text-decoration: none;
   transition: color 0.2s;
@@ -1040,31 +1047,23 @@ input, select, textarea {
 }
 
 .footer-copyright-v2 .copyright-text {
-  color: #666;
+  color: #555;
   font-size: 13px;
+  text-align: center;
+  flex: 1;
 }
 
 .nic-logo {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #666;
+  color: #555;
   font-size: 12px;
 }
 
 .nic-logo img {
   height: 28px;
   width: auto;
-}
-
-.footer-bottom-links a {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
-  transition: color 0.2s;
-}
-
-.footer-bottom-links a:hover {
-  color: white;
 }
 
 /* ========================================
@@ -1542,76 +1541,106 @@ input, select, textarea {
     min-width: 70px;
     max-width: 90px;
   }
-  
-  .footer-links-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 1024px) {
   .footer-container {
-    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .footer-link-column {
+    flex: 1;
+  }
+  
+  .footer-social-column {
+    flex: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Footer Tablet Styles */
+  .footer-main-v2 .footer-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+  }
+  
+  .footer-link-column {
+    flex: 0 0 calc(50% - 16px);
+    min-width: 200px;
+  }
+  
+  .footer-social-column {
+    flex: 0 0 calc(50% - 16px);
   }
   
   .footer-brand-column {
+    flex: 0 0 100%;
     flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
+    align-items: center;
     gap: 24px;
+    order: -1;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E0E0E0;
+    margin-bottom: 8px;
   }
   
   .brand-logo-phone {
-    padding: 16px 20px;
+    padding: 16px 24px;
   }
   
-  .footer-links-container {
-    grid-template-columns: repeat(4, 1fr);
+  .registered-badge {
+    margin-top: 0;
   }
 }
 
 @media (max-width: 768px) {
   /* Footer Mobile Styles */
-  .footer-container {
-    flex-direction: column !important;
-    padding: 0 16px;
+  .footer-main-v2 .footer-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    gap: 28px;
+  }
+  
+  .footer-link-column {
+    flex: 0 0 100%;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .footer-social-column {
+    flex: 0 0 100%;
+    width: 100%;
   }
   
   .footer-brand-column {
     flex-direction: column;
-    align-items: center;
-    width: 100%;
+    padding-bottom: 20px;
     gap: 16px;
   }
   
   .brand-logo-phone {
-    width: auto;
-    padding: 16px 24px;
+    padding: 20px 32px;
   }
   
-  .app-downloads-v2 {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-  }
-  
-  .app-downloads-v2 img {
-    max-width: 120px;
-  }
-  
-  .footer-links-container {
-    grid-template-columns: 1fr !important;
-    gap: 24px;
-    text-align: center;
-  }
-  
-  .footer-link-column {
-    text-align: center;
+  .brand-logo .logo {
+    width: 40px;
+    height: 60px;
   }
   
   .footer-link-column h4 {
+    margin-bottom: 14px;
+    font-size: 16px;
+  }
+  
+  .footer-link-column ul li {
     margin-bottom: 12px;
+  }
+  
+  .footer-link-column ul li a {
+    font-size: 15px;
   }
   
   .social-icons-row,
@@ -1625,12 +1654,20 @@ input, select, textarea {
     gap: 12px;
   }
   
+  .footer-copyright-v2 .copyright-text {
+    order: 1;
+  }
+  
   .copyright-links {
     justify-content: center;
+    order: 2;
   }
   
   .nic-logo {
     justify-content: center;
+    order: 3;
+    flex-direction: column;
+    gap: 4px;
   }
   
   /* Stepper Mobile */
@@ -1659,22 +1696,71 @@ input, select, textarea {
 
 @media (max-width: 480px) {
   .footer-main-v2 {
-    padding: 24px 0;
+    padding: 28px 0;
   }
   
-  .footer-links-container {
-    gap: 20px;
+  .footer-main-v2 .footer-container {
+    padding: 0 16px;
+    gap: 24px;
+  }
+  
+  .footer-link-column h4 {
+    font-size: 15px;
   }
   
   .footer-link-column ul li {
     margin-bottom: 10px;
   }
   
-  .app-downloads-v2 img {
-    max-width: 100px;
+  .footer-link-column ul li a {
+    font-size: 14px;
+  }
+  
+  .brand-logo-phone {
+    padding: 16px 24px;
+  }
+  
+  .brand-logo .logo {
+    width: 36px;
+    height: 54px;
+  }
+  
+  .brand-phone {
+    font-size: 16px;
+  }
+  
+  .social-icons-row a,
+  .accessibility-icons button {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .registered-badge {
+    padding: 8px 12px;
   }
   
   .registered-badge img {
     height: 30px;
+  }
+  
+  .footer-copyright-v2 {
+    padding: 14px 0;
+  }
+  
+  .footer-copyright-v2 .footer-container {
+    padding: 0 16px;
+  }
+  
+  .footer-copyright-v2 .copyright-text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  
+  .nic-logo {
+    font-size: 11px;
+  }
+  
+  .nic-logo img {
+    height: 24px;
   }
 }
